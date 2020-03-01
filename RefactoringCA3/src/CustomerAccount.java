@@ -35,7 +35,6 @@ public class CustomerAccount  {
 		return this.transactionList;
 	}
 
-	//Mutator methods
 	public void setNumber(String number)
 	{
 		this.number = number;

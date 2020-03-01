@@ -69,7 +69,6 @@ public class Customer {
 		return this.accounts;
 	}
 	
-	//mutator methods
 	public void setPPS(String PPS)
 	{
 		this.PPS = PPS;
@@ -89,9 +88,6 @@ public class Customer {
 	{
 		this.DOB = DOB;
 	}
-	
-
-
 	
 	public void setCustomerID(String customerID)
 	{

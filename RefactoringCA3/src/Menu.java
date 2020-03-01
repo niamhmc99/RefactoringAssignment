@@ -18,21 +18,19 @@ public class Menu extends JFrame{
 	
 	private ArrayList<Customer> customerList = new ArrayList<Customer>();
     private int position = 0;
-	private String password;
-	private Customer customer = null;
+	private Customer customer;
 	private CustomerAccount acc = new CustomerAccount();
+	JTextArea textArea;
 	JFrame f, f1;
-	 JLabel firstNameLabel, surnameLabel, pPPSLabel, dOBLabel;
-	 JTextField firstNameTextField, surnameTextField, pPSTextField, dOBTextField;
-		JLabel customerIDLabel, passwordLabel;
-		JTextField customerIDTextField, passwordTextField;
+	JLabel firstNameLabel, surnameLabel, pPPSLabel, dOBLabel, customerIDLabel, passwordLabel, label1, label;
+	JTextField firstNameTextField, surnameTextField, pPSTextField, dOBTextField, customerIDTextField, passwordTextField;
 	Container content;
-		Customer e;
-
-
-	 JPanel panel2;
-		JButton add;
-		String 	PPS,firstName,surname,DOB,CustomerID;
+	JPanel panel2, userTypePanel, continuePanel, deleteCustomerPanel, deleteAccountPanel, bankChargesPanel, interestPanel, editCustomerPanel, navigatePanel, summaryPanel, accountPanel, returnPanel,labelPanel, boxPanel, buttonPanel, textPanel,cancelPanel, statementPanel, withdrawalPanel, lodgementPanel,gridPanel ;
+	JButton add, continueButton, cancel,deleteCustomer, deleteAccount, bankChargesButton, interestButton, editCustomerButton, navigateButton, summaryButton, accountButton, returnButton, saveButton, withdrawButton, lodgementButton, statementButton, first, previous, next, last; 
+	String 	PPS,firstName,surname,DOB,CustomerID, password;
+	
+	 
+	 		
 	
 	public static void main(String[] args)
 	{
@@ -44,10 +42,7 @@ public class Menu extends JFrame{
 	{
 		   /*The menuStart method asks the user if they are a new customer, an existing customer or an admin. It will then start the create customer process
 		  if they are a new customer, or will ask them to log in if they are an existing customer or admin.*/
-		
-			
-		
-			
+					
 			f = new JFrame("User Type");
 			f.setSize(400, 300);
 			f.setLocation(200, 200);
@@ -55,7 +50,7 @@ public class Menu extends JFrame{
 				public void windowClosing(WindowEvent we) { System.exit(0); }
 			});
 
-			JPanel userTypePanel = new JPanel();
+			userTypePanel = new JPanel();
 			final ButtonGroup userType = new ButtonGroup();
 			JRadioButton radioButton;
 			userTypePanel.add(radioButton = new JRadioButton("Existing Customer"));
@@ -70,8 +65,8 @@ public class Menu extends JFrame{
 			radioButton.setActionCommand("New Customer");
 			userType.add(radioButton);
 
-			JPanel continuePanel = new JPanel();
-			JButton continueButton = new JButton("Continue");
+			continuePanel = new JPanel();
+			 continueButton = new JButton("Continue");
 			continuePanel.add(continueButton);
 
 			Container content = f.getContentPane();
@@ -79,13 +74,10 @@ public class Menu extends JFrame{
 			content.add(userTypePanel);
 			content.add(continuePanel);
 
-
-
 			continueButton.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {
 					String user = userType.getSelection().getActionCommand(  );
 					
-					//if user selects NEW CUSTOMER--------------------------------------------------------------------------------------
 					if(user.equals("New Customer"))
 					{
 						f.dispose();		
@@ -131,10 +123,6 @@ public class Menu extends JFrame{
 					
 						CustomerID = "ID"+PPS ;
 						
-					
-						
-						
-						
 						
 						add.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -144,7 +132,7 @@ public class Menu extends JFrame{
 								while(loop){
 								 password = JOptionPane.showInputDialog(f, "Enter 7 character Password;");
 								
-								 if(password.length() != 7)//Making sure password is 7 characters
+								 if(password.length() != 7)
 								    {
 								    	JOptionPane.showMessageDialog(null, null, "Password must be 7 charatcers long", JOptionPane.OK_OPTION);
 								    }
@@ -169,7 +157,7 @@ public class Menu extends JFrame{
 						});	
 								}
 							});						
-							JButton cancel = new JButton("Cancel");					
+							cancel = new JButton("Cancel");					
 							cancel.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent e) {
 									f1.dispose();
@@ -188,9 +176,7 @@ public class Menu extends JFrame{
 					}
 					
 					
-					//------------------------------------------------------------------------------------------------------------------
 					
-					//if user select ADMIN----------------------------------------------------------------------------------------------
 					if(user.equals("Administrator")	)
 					{
 						boolean loop = true, loop2 = true;
@@ -223,7 +209,7 @@ public class Menu extends JFrame{
 					    {
 					    	Object adminPassword = JOptionPane.showInputDialog(f, "Enter Administrator Password;");
 					    	
-					    	   if(!adminPassword.equals("admin11"))//search admin list for admin with matching admin password
+					    	   if(!adminPassword.equals("admin11"))
 							    {
 							    	int reply  = JOptionPane.showConfirmDialog(null, null, "Incorrect Password. Try again?", JOptionPane.YES_NO_OPTION);
 							    	if (reply == JOptionPane.YES_OPTION) {
@@ -249,17 +235,10 @@ public class Menu extends JFrame{
 					    admin();					    
 					    }					    
 					}
-					//----------------------------------------------------------------------------------------------------------------
 					
-					
-					
-					//if user selects CUSTOMER ---------------------------------------------------------------------------------------- 
 					if(user.equals("Customer")	)
 					{
-						boolean loop = true, loop2 = true;
-						boolean cont = false;
-						boolean found = false;
-						Customer customer = null;
+						boolean loop = true, loop2 = true, cont = false, found = false;
 					    while(loop)
 					    {
 					    Object customerID = JOptionPane.showInputDialog(f, "Enter Customer ID:");
@@ -298,7 +277,7 @@ public class Menu extends JFrame{
 					    {
 					    	Object customerPassword = JOptionPane.showInputDialog(f, "Enter Customer Password;");
 					    	
-					    	   if(!customer.getPassword().equals(customerPassword))//check if custoemr password is correct
+					    	   if(!customer.getPassword().equals(customerPassword))
 							    {
 							    	int reply  = JOptionPane.showConfirmDialog(null, null, "Incorrect password. Try again?", JOptionPane.YES_NO_OPTION);
 							    	if (reply == JOptionPane.YES_OPTION) {
@@ -324,7 +303,6 @@ public class Menu extends JFrame{
 					    	customer(customer);				    
 					    }				    
 					}
-					//-----------------------------------------------------------------------------------------------------------------------
 				}
 			});f.setVisible(true);	
 	}
@@ -343,51 +321,56 @@ public class Menu extends JFrame{
 		});          
 		f.setVisible(true);
 		
-		JPanel deleteCustomerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton deleteCustomer = new JButton("Delete Customer");	
+		
+		deleteCustomerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		deleteCustomer = new JButton("Delete Customer");	
 		deleteCustomer.setPreferredSize(new Dimension(250, 20));
 		deleteCustomerPanel.add(deleteCustomer);
 		
-		JPanel deleteAccountPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton deleteAccount = new JButton("Delete Account");
+		deleteAccountPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		deleteAccount = new JButton("Delete Account");
 		deleteAccount.setPreferredSize(new Dimension(250, 20));	
 		deleteAccountPanel.add(deleteAccount);
 		
-		JPanel bankChargesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton bankChargesButton = new JButton("Apply Bank Charges");
+		 bankChargesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		bankChargesButton = new JButton("Apply Bank Charges");
 		bankChargesButton.setPreferredSize(new Dimension(250, 20));	
 		bankChargesPanel.add(bankChargesButton);
 		
-		JPanel interestPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton interestButton = new JButton("Apply Interest");
+		 interestPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		interestButton = new JButton("Apply Interest");
 		interestPanel.add(interestButton);
 		interestButton.setPreferredSize(new Dimension(250, 20));
 		
-		JPanel editCustomerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton editCustomerButton = new JButton("Edit existing Customer");
+		
+		
+		 editCustomerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		editCustomerButton = new JButton("Edit existing Customer");
 		editCustomerPanel.add(editCustomerButton);
 		editCustomerButton.setPreferredSize(new Dimension(250, 20));
 		
-		JPanel navigatePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton navigateButton = new JButton("Navigate Customer Collection");
+		 navigatePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		 navigateButton = new JButton("Navigate Customer Collection");
 		navigatePanel.add(navigateButton);
 		navigateButton.setPreferredSize(new Dimension(250, 20));
 		
-		JPanel summaryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton summaryButton = new JButton("Display Summary Of All Accounts");
+		 summaryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		summaryButton = new JButton("Display Summary Of All Accounts");
 		summaryPanel.add(summaryButton);
 		summaryButton.setPreferredSize(new Dimension(250, 20));
 		
-		JPanel accountPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton accountButton = new JButton("Add an Account to a Customer");
+
+		
+		 accountPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		 accountButton = new JButton("Add an Account to a Customer");
 		accountPanel.add(accountButton);
 		accountButton.setPreferredSize(new Dimension(250, 20));
 		
-		JPanel returnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		JButton returnButton = new JButton("Exit Admin Menu");
+		 returnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		returnButton = new JButton("Exit Admin Menu");
 		returnPanel.add(returnButton);
 
-		JLabel label1 = new JLabel("Please select an option");
+		label1 = new JLabel("Please select an option");
 		
 		content = f.getContentPane();
 		content.setLayout(new GridLayout(9, 1));
@@ -470,16 +453,19 @@ public class Menu extends JFrame{
 				    
 				    box.getSelectedItem();
 				
-				    JPanel boxPanel = new JPanel();
+				     boxPanel = new JPanel();
 					boxPanel.add(box);
 					
-					JPanel buttonPanel = new JPanel();
-					JButton continueButton = new JButton("Apply Charge");
-					JButton returnButton = new JButton("Return");
-					buttonPanel.add(continueButton);
-					buttonPanel.add(returnButton);
-					Container content = f.getContentPane();
-					content.setLayout(new GridLayout(2, 1));
+				
+					
+					 buttonPanel = new JPanel();
+					 continueButton = new JButton("Apply Charge");
+					 returnButton = new JButton("Return");
+					 buttonPanel.add(continueButton);
+					 buttonPanel.add(returnButton);
+					 
+					 Container content = f.getContentPane();
+				   	 content.setLayout(new GridLayout(2, 1));
 					
 					content.add(boxPanel);
 					content.add(buttonPanel);
@@ -542,9 +528,6 @@ public class Menu extends JFrame{
 			    }
 			    }
 			    }
-			    
-			    
-			    
 			}		
 	     });
 		
@@ -615,14 +598,14 @@ public class Menu extends JFrame{
 				    
 				    box.getSelectedItem();
 				
-				    JPanel boxPanel = new JPanel();
+				    boxPanel = new JPanel();
 					
-					JLabel label = new JLabel("Select an account to apply interest to:");
+					label = new JLabel("Select an account to apply interest to:");
 					boxPanel.add(label);
 					boxPanel.add(box);
-					JPanel buttonPanel = new JPanel();
-					JButton continueButton = new JButton("Apply Interest");
-					JButton returnButton = new JButton("Return");
+					buttonPanel = new JPanel();
+					continueButton = new JButton("Apply Interest");
+					returnButton = new JButton("Return");
 					buttonPanel.add(continueButton);
 					buttonPanel.add(returnButton);
 					Container content = f.getContentPane();
@@ -668,14 +651,10 @@ public class Menu extends JFrame{
 								
 								JOptionPane.showMessageDialog(f, interest + "% interest applied. \n new balance = " + acc.getBalance() + euro ,"Success!",  JOptionPane.INFORMATION_MESSAGE);
 							}
-								
-							
 							else
 							{
 								JOptionPane.showMessageDialog(f, "You must enter a numerical value!" ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
 							}
-							
-							
 						 	}
 							
 							f.dispose();				
@@ -772,9 +751,9 @@ public class Menu extends JFrame{
 				customerIDTextField = new JTextField(20);
 				passwordTextField = new JTextField(20);
 				
-				JPanel textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		
-				JPanel cancelPanel = new JPanel();
+				textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			
+				cancelPanel = new JPanel();
 				
 				textPanel.add(firstNameLabel);
 				textPanel.add(firstNameTextField);
@@ -796,13 +775,12 @@ public class Menu extends JFrame{
 				customerIDTextField.setText(customer.getCustomerID());
 				passwordTextField.setText(customer.getPassword());	
 				
-				//JLabel label1 = new JLabel("Edit customer details below. The save");
 				
 			
-				JButton saveButton = new JButton("Save");
-				JButton cancelButton = new JButton("Exit");
+				 saveButton = new JButton("Save");
+				 cancel = new JButton("Exit");
 				
-				cancelPanel.add(cancelButton, BorderLayout.SOUTH);
+				cancelPanel.add(cancel, BorderLayout.SOUTH);
 				cancelPanel.add(saveButton, BorderLayout.SOUTH);
 			//	content.removeAll();
 				Container content = f.getContentPane();
@@ -830,7 +808,7 @@ public class Menu extends JFrame{
 							}		
 					     });
 				
-				cancelButton.addActionListener(new ActionListener(  ) {
+				cancel.addActionListener(new ActionListener(  ) {
 					public void actionPerformed(ActionEvent ae) {
 						f.dispose();
 						
@@ -853,16 +831,16 @@ public class Menu extends JFrame{
 				});          
 				f.setVisible(true);
 				
-				JLabel label1 = new JLabel("Summary of all transactions: ");
+				label1 = new JLabel("Summary of all transactions: ");
 				
-				JPanel returnPanel = new JPanel();
-				JButton returnButton = new JButton("Return");
+				returnPanel = new JPanel();
+				returnButton = new JButton("Return");
 				returnPanel.add(returnButton);
 				
-				JPanel textPanel = new JPanel();
+				 textPanel = new JPanel();
 				
 				textPanel.setLayout( new BorderLayout() );
-				JTextArea textArea = new JTextArea(40, 20);
+				textArea = new JTextArea(40, 20);
 				textArea.setEditable(false);
 				textPanel.add(label1, BorderLayout.NORTH);
 				textPanel.add(textArea, BorderLayout.CENTER);
@@ -920,8 +898,7 @@ public class Menu extends JFrame{
 				else
 				{
 		
-				JButton first, previous, next, last, cancel;
-				JPanel gridPanel, buttonPanel, cancelPanel;			
+					
 	
 				Container content = getContentPane();
 				
@@ -1004,7 +981,6 @@ public class Menu extends JFrame{
 								
 						if(position < 1)
 						{
-							//don't do anything
 						}
 						else
 						{
@@ -1025,7 +1001,6 @@ public class Menu extends JFrame{
 					
 						if(position == customerList.size()-1)
 						{
-							//don't do anything
 						}
 						else
 						{
@@ -1277,7 +1252,7 @@ public class Menu extends JFrame{
 	public void customer(Customer e1)
 	{	
 		f = new JFrame("Customer Menu");
-		e1 = e;
+		
 		f.setSize(400, 300);
 		f.setLocation(200, 200);
 		f.addWindowListener(new WindowAdapter() {
@@ -1285,7 +1260,7 @@ public class Menu extends JFrame{
 		});          
 		f.setVisible(true);
 		
-		if(e.getAccounts().size() == 0)
+		if(customer.getAccounts().size() == 0)
 		{
 			JOptionPane.showMessageDialog(f, "This customer does not have any accounts yet. \n An admin must create an account for this customer \n for them to be able to use customer functionality. " ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
 			f.dispose();				
@@ -1293,31 +1268,31 @@ public class Menu extends JFrame{
 		}
 		else
 		{
-		JPanel buttonPanel = new JPanel();
-		JPanel boxPanel = new JPanel();
-		JPanel labelPanel = new JPanel();
+		 buttonPanel = new JPanel();
+		 boxPanel = new JPanel();
+		 labelPanel = new JPanel();
 		
-		JLabel label = new JLabel("Select Account:");
+		 label = new JLabel("Select Account:");
 		labelPanel.add(label);
 		
-		JButton returnButton = new JButton("Return");
+		 returnButton = new JButton("Return");
 		buttonPanel.add(returnButton);
-		JButton continueButton = new JButton("Continue");
+		 continueButton = new JButton("Continue");
 		buttonPanel.add(continueButton);
 		
 		JComboBox<String> box = new JComboBox<String>();
-	    for (int i =0; i < e.getAccounts().size(); i++)
+	    for (int i =0; i < customer.getAccounts().size(); i++)
 	    {
-	     box.addItem(e.getAccounts().get(i).getNumber());
+	     box.addItem(customer.getAccounts().get(i).getNumber());
 	    }
 		
 	    
 	   
-	    for(int i = 0; i<e.getAccounts().size(); i++)
+	    for(int i = 0; i<customer.getAccounts().size(); i++)
 	    {
-	    	if(e.getAccounts().get(i).getNumber() == box.getSelectedItem() )
+	    	if(customer.getAccounts().get(i).getNumber() == box.getSelectedItem() )
 	    	{
-	    		acc = e.getAccounts().get(i);
+	    		acc = customer.getAccounts().get(i);
 	    	}
 	    }
 	    
@@ -1352,27 +1327,29 @@ public class Menu extends JFrame{
 		});          
 		f.setVisible(true);
 		
-		JPanel statementPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton statementButton = new JButton("Display Bank Statement");
+		 statementPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		 statementButton = new JButton("Display Bank Statement");
 		statementButton.setPreferredSize(new Dimension(250, 20));
 		
 		statementPanel.add(statementButton);
 		
-		JPanel lodgementPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton lodgementButton = new JButton("Lodge money into account");
+		
+		
+		 lodgementPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		 lodgementButton = new JButton("Lodge money into account");
 		lodgementPanel.add(lodgementButton);
 		lodgementButton.setPreferredSize(new Dimension(250, 20));
 		
-		JPanel withdrawalPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JButton withdrawButton = new JButton("Withdraw money from account");
+		 withdrawalPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		 withdrawButton = new JButton("Withdraw money from account");
 		withdrawalPanel.add(withdrawButton);
 		withdrawButton.setPreferredSize(new Dimension(250, 20));
 		
-		JPanel returnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		JButton returnButton = new JButton("Exit Customer Menu");
+		 returnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		 returnButton = new JButton("Exit Customer Menu");
 		returnPanel.add(returnButton);
 
-		JLabel label1 = new JLabel("Please select an option");
+		 label1 = new JLabel("Please select an option");
 		
 		content = f.getContentPane();
 		content.setLayout(new GridLayout(5, 1));
@@ -1393,16 +1370,16 @@ public class Menu extends JFrame{
 				});          
 				f.setVisible(true);
 				
-				JLabel label1 = new JLabel("Summary of account transactions: ");
+				 label1 = new JLabel("Summary of account transactions: ");
 				
-				JPanel returnPanel = new JPanel();
-				JButton returnButton = new JButton("Return");
+				returnPanel = new JPanel();
+				returnButton = new JButton("Return");
 				returnPanel.add(returnButton);
 				
-				JPanel textPanel = new JPanel();
+				textPanel = new JPanel();
 				
 				textPanel.setLayout( new BorderLayout() );
-				JTextArea textArea = new JTextArea(40, 20);
+				textArea = new JTextArea(40, 20);
 				textArea.setEditable(false);
 				textPanel.add(label1, BorderLayout.NORTH);
 				textPanel.add(textArea, BorderLayout.CENTER);
@@ -1423,14 +1400,13 @@ public class Menu extends JFrame{
 				
 				Container content = f.getContentPane();
 				content.setLayout(new GridLayout(1, 1));
-			//	content.add(label1);
 				content.add(textPanel);
 				//content.add(returnPanel);
 				
 				returnButton.addActionListener(new ActionListener(  ) {
 					public void actionPerformed(ActionEvent ae) {
 						f.dispose();			
-					customer(e);				
+					customer(customer);				
 					}		
 			     });										
 			}	
@@ -1454,7 +1430,7 @@ public class Menu extends JFrame{
 					{
 						JOptionPane.showMessageDialog(f, "Pin entered incorrectly 3 times. ATM card locked."  ,"Pin",  JOptionPane.INFORMATION_MESSAGE);
 						((CustomerCurrentAccount) acc).getAtm().setValid(false);
-						customer(e); 
+						customer(customer); 
 						loop = false;
 						on = false;
 					}
@@ -1536,7 +1512,7 @@ public class Menu extends JFrame{
 						{
 							JOptionPane.showMessageDialog(f, "Pin entered incorrectly 3 times. ATM card locked."  ,"Pin",  JOptionPane.INFORMATION_MESSAGE);
 							((CustomerCurrentAccount) acc).getAtm().setValid(false);
-							customer(e); 
+							customer(customer); 
 							loop = false;
 							on = false;
 						}
@@ -1596,7 +1572,6 @@ public class Menu extends JFrame{
 				
 				String euro = "\u20ac";
 				 acc.setBalance(acc.getBalance()-withdraw);
-				   //recording transaction:
 			//		String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 				 Date date = new Date();
 				 String date2 = date.toString();
@@ -1629,7 +1604,7 @@ public class Menu extends JFrame{
 	}
 	}
 	
-	public static boolean isNumeric(String str)  // a method that tests if a string is numeric
+	public static boolean isNumeric(String str) 
 	{  
 	  try  
 	  {  

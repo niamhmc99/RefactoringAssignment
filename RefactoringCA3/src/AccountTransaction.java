@@ -4,27 +4,20 @@ public class AccountTransaction {
 	String type;
 	double amount;
 	
-	//Blank constructor
 	public AccountTransaction()
 	{
 		this.date = "";
 		this.type = "";	
-		this.amount = 0;
-		
+		this.amount = 0;	
 	}
 	
-	//Constructor with details
 	public AccountTransaction(String date, String type, double amount)
 	{
 		this.date = date;
 		this.type = type;
-		
-		
 		this.amount = amount;
-		
 	}
 	
-	//Accessor methods
 	public String getDate()
 	{
 		return this.date;
@@ -40,7 +33,6 @@ public class AccountTransaction {
 		return this.amount;
 	}
 
-	//mutator methods
 	public void setDate(String date)
 	{
 		this.date = date;
