@@ -20,7 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class Admin extends JFrame{
+public class Admin extends JFrame implements CloseWindow{
 
 	private static final long serialVersionUID = 1L;
 	ArrayList<Customer> customerList = Menu.returnArray();
@@ -78,9 +78,7 @@ public class Admin extends JFrame{
 						menu.userTypeFrame = new JFrame("Administrator Menu");
 						menu.userTypeFrame.setSize(400, 300);
 						menu.userTypeFrame.setLocation(200, 200);
-						menu.userTypeFrame.addWindowListener(new WindowAdapter() {
-							public void windowClosing(WindowEvent we) { System.exit(0); }
-						});          
+						closeWindow();        
 						menu.userTypeFrame.setVisible(true);
 			
 			
@@ -209,9 +207,7 @@ public class Admin extends JFrame{
 						menu.userTypeFrame = new JFrame("Administrator Menu");
 						menu.userTypeFrame.setSize(400, 300);
 						menu.userTypeFrame.setLocation(200, 200);
-						menu.userTypeFrame.addWindowListener(new WindowAdapter() {
-							public void windowClosing(WindowEvent we) { System.exit(0); }
-						});          
+						closeWindow();                 
 						menu.userTypeFrame.setVisible(true);
 			
 			
@@ -347,9 +343,7 @@ public class Admin extends JFrame{
 			menu.userTypeFrame = new JFrame("Administrator Menu");
 			menu.userTypeFrame.setSize(400, 300);
 			menu.userTypeFrame.setLocation(200, 200);
-			menu.userTypeFrame.addWindowListener(new WindowAdapter() {
-				public void windowClosing(WindowEvent we) { System.exit(0); }
-			});       
+			closeWindow();      
 			
 			menu.firstNameLabel = new JLabel("First Name:", SwingConstants.LEFT);
 			menu.surnameLabel = new JLabel("Surname:", SwingConstants.LEFT);
@@ -433,10 +427,7 @@ public class Admin extends JFrame{
 		menu.userTypeFrame = new JFrame("Summary of Transactions");
 		menu.userTypeFrame.setSize(400, 700);
 		menu.userTypeFrame.setLocation(200, 200);
-		menu.userTypeFrame.addWindowListener(new WindowAdapter() {
-				public void windowClosing(WindowEvent we) { 
-					System.exit(0); }
-		});          
+		closeWindow();         
 		menu.userTypeFrame.setVisible(true);
 			
 			label1 = new JLabel("Summary of all transactions: ");
@@ -809,6 +800,17 @@ public class Admin extends JFrame{
 			return false;
 		}
 		return true;
+	}
+
+
+
+	@Override
+	public void closeWindow() {
+		menu.userTypeFrame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
+			}
+		});
 	}
 
 

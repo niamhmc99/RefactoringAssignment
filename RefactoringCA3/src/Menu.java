@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Menu extends JFrame{
 	
-	private static ArrayList<Customer> customerList = new ArrayList<Customer>();
+	private static ArrayList<Customer> customerList;
     int position = 0;
 	Customer customer;
 	private static CustomerAccount acc = new CustomerAccount();
