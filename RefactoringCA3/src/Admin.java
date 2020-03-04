@@ -25,7 +25,7 @@ public class Admin extends JFrame implements CloseWindow{
 	private static final long serialVersionUID = 1L;
 	ArrayList<Customer> customerList = Menu.returnArray();
 	Menu menu = new Menu();
-	MenuButtons butt = new MenuButtons();
+	MenuButtons button = new MenuButtons();
 	CustomerAccount acc = Menu.returnAcc();
 	JPanel boxPanel,buttonPanel, gridPanel, cancelPanel, textPanel, returnPanel;
 	JButton continueButton,returnButton;
@@ -69,7 +69,7 @@ public class Admin extends JFrame implements CloseWindow{
 						{
 							menu.userTypeFrame.dispose();
 							loop = false;
-							butt.returnAdmin();
+							button.returnAdmin();
 						}
 					}  
 					else
@@ -112,7 +112,7 @@ public class Admin extends JFrame implements CloseWindow{
 					{
 						JOptionPane.showMessageDialog(menu.userTypeFrame, "This customer has no accounts! \n The admin must add acounts to this customer."   ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
 						menu.userTypeFrame.dispose();
-						butt.returnAdmin();
+						button.returnAdmin();
 					}
 					else
 					{
@@ -143,19 +143,20 @@ public class Admin extends JFrame implements CloseWindow{
 							JOptionPane.showMessageDialog(menu.userTypeFrame, "New balance = " + acc.getBalance() ,"Success!",  JOptionPane.INFORMATION_MESSAGE);
 						}
 						menu.userTypeFrame.dispose();				
-						butt.returnAdmin();			
+						button.returnAdmin();			
 					}		
 			     });
 				
 					returnButton.addActionListener(new ActionListener(  ) {
 						public void actionPerformed(ActionEvent ae) {
-							butt.returnButton();				
+							button.returnButton();				
 						}
 					});	
 				
 					}
 					}
 				}
+			}
 		    }
 		
      
@@ -274,13 +275,13 @@ public class Admin extends JFrame implements CloseWindow{
 							JOptionPane.showMessageDialog(menu.userTypeFrame, "You must enter a numerical value!" ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
 					 			}
 					 	}
-					 	butt.returnAdmin();				
+					 	button.returnAdmin();				
 					}		
 			     });
 				
 				returnButton.addActionListener(new ActionListener(  ) {
 					public void actionPerformed(ActionEvent ae) {
-						butt.returnButton();				
+						button.returnButton();				
 					}
 			     });	
 				
@@ -415,7 +416,7 @@ public class Admin extends JFrame implements CloseWindow{
 			
 			cancelBtn.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {
-					butt.returnAdmin();				
+					button.returnAdmin();				
 				}		
 		     });		
 			}}
@@ -468,7 +469,7 @@ public class Admin extends JFrame implements CloseWindow{
 			
 			returnButton.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {
-					butt.returnAdmin();				
+					button.returnAdmin();				
 				}		
 		     });	
 		}	
@@ -610,7 +611,7 @@ public class Admin extends JFrame implements CloseWindow{
 			
 			cancel.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {				
-					butt.returnAdmin();
+					button.returnAdmin();
 				}		
 			});		
 			
@@ -724,10 +725,7 @@ public class Admin extends JFrame implements CloseWindow{
 					    {
 					    	int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
 					    	if (reply == JOptionPane.YES_OPTION) {
-					    		loop = true;
-					    	}
-					    	else if(reply == JOptionPane.NO_OPTION)
-					    	{
+					    	} else if(reply == JOptionPane.NO_OPTION){
 					    		menu.userTypeFrame.dispose();
 					    		menu.admin();
 					    	}
@@ -783,17 +781,18 @@ public class Admin extends JFrame implements CloseWindow{
 
 	public void CustomerListEmpty() {
 		JOptionPane.showMessageDialog(Menu.jFrame, "There are no customers yet!", "Oops!", JOptionPane.INFORMATION_MESSAGE);
-		butt.returnAdmin();
+		button.returnAdmin();
 	}
 
 	public void CustomerAccountsEmpty() {
 		JOptionPane.showMessageDialog(Menu.jFrame,
 			"This customer has no accounts! \n The admin must add acounts to this customer.", "Oops!",
 			JOptionPane.INFORMATION_MESSAGE);
-		butt.returnAdmin();
+		button.returnAdmin();
 	}
 	
-	public static boolean isNumeric(String str) {
+	@Override
+	public boolean isNumeric(String str) {
 		try {
 			double d = Double.parseDouble(str);
 		} catch (NumberFormatException nfe) {
