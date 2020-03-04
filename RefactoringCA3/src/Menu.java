@@ -6,12 +6,14 @@ import java.util.Date;
 
 public class Menu extends JFrame{
 	
-	private ArrayList<Customer> customerList = new ArrayList<Customer>();
+	private static ArrayList<Customer> customerList = new ArrayList<Customer>();
     private int position = 0;
-	private Customer customer;
-	private CustomerAccount acc = new CustomerAccount();
+	Customer customer;
+	private static CustomerAccount acc = new CustomerAccount();
 	JTextArea textArea;
-	JFrame userTypeFrame, createNewCustomerFrame;
+	static JFrame jFrame;
+	JFrame userTypeFrame;
+	JFrame createNewCustomerFrame;
 	JLabel firstNameLabel, surnameLabel, pPPSLabel, dOBLabel, customerIDLabel, passwordLabel, label1, label;
 	JTextField firstNameTextField, surnameTextField, pPSTextField, dOBTextField, customerIDTextField, passwordTextField;
 	Container content;
@@ -592,41 +594,39 @@ public class Menu extends JFrame{
 						else
 						{
 						
-					for(int i = 0; i < customer.getAccounts().size(); i++)
-				    {
-				    	if(customer.getAccounts().get(i).getNumber() == box.getSelectedItem() )
-				    	{
-				    		acc = customer.getAccounts().get(i);
-				    	}
-				    }
+							for(int i = 0; i < customer.getAccounts().size(); i++)
+							{
+								if(customer.getAccounts().get(i).getNumber() == box.getSelectedItem() )
+								{
+									acc = customer.getAccounts().get(i);
+								}
+							}
 										
-					continueButton.addActionListener(new ActionListener(  ) {
-						public void actionPerformed(ActionEvent ae) {
-							String euro = "\u20ac";
-						 	double interest = 0;
-						 	boolean loop = true;
+						continueButton.addActionListener(new ActionListener(  ) {
+						
+							public void actionPerformed(ActionEvent ae) {
+								String euro = "\u20ac";
+								double interest = 0;
+								boolean loop = true;
 						 	
 						 	while(loop)
 						 	{
-							String interestString = JOptionPane.showInputDialog(userTypeFrame, "Enter interest percentage you wish to apply: \n NOTE: Please enter a numerical value. (with no percentage sign) \n E.g: If you wish to apply 8% interest, enter '8'");//the isNumeric method tests to see if the string entered was numeric. 
-							if(isNumeric(interestString))
-							{
+						 		String interestString = JOptionPane.showInputDialog(userTypeFrame, "Enter interest percentage you wish to apply: \n NOTE: Please enter a numerical value. (with no percentage sign) \n E.g: If you wish to apply 8% interest, enter '8'");//the isNumeric method tests to see if the string entered was numeric. 
+						 			if(isNumeric(interestString)) {
+						 			interest = Double.parseDouble(interestString);
+									loop = false;
 								
-								interest = Double.parseDouble(interestString);
-								loop = false;
-								
-								acc.setBalance(acc.getBalance() + (acc.getBalance() * (interest/100)));
-								
-								JOptionPane.showMessageDialog(userTypeFrame, interest + "% interest applied. \n new balance = " + acc.getBalance() + euro ,"Success!",  JOptionPane.INFORMATION_MESSAGE);
-							}
-							else
-							{
+									acc.setBalance(acc.getBalance() + (acc.getBalance() * (interest/100)));
+									JOptionPane.showMessageDialog(userTypeFrame, interest + "% interest applied. \n new balance = " + acc.getBalance() + euro ,"Success!",  JOptionPane.INFORMATION_MESSAGE);
+						 			}
+						 			else
+						 			{
 								JOptionPane.showMessageDialog(userTypeFrame, "You must enter a numerical value!" ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
-							}
+						 			}
 						 	}
 							
 							userTypeFrame.dispose();				
-						admin();				
+							admin();				
 						}		
 				     });
 					
@@ -641,7 +641,6 @@ public class Menu extends JFrame{
 			    }
 			    }
 			    }
-			    
 			}	
 	     });
 		
@@ -1545,5 +1544,13 @@ public class Menu extends JFrame{
 	    return false;  
 	  }  
 	  return true;  
+	}
+
+	public static CustomerAccount returnAcc() {
+		return (acc);
+	}
+	
+	public static ArrayList<Customer> returnArray() {
+		return customerList;
 	}
 }
