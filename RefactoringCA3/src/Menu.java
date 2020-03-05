@@ -144,6 +144,55 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 		adminActionListener();
 	}
 	
+	private void adminActionListener() {
+		Admin admin = new Admin();
+		bankChargesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				admin.bankCharges();
+			}
+		});
+		interestButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				admin.interest();
+			}
+		});
+		editCustomerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				admin.editCustomer();
+			}
+		});
+		summaryButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				admin.summary();
+			}
+		});
+		navigateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				admin.navigate();
+			}
+		});
+		accountButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				admin.createAccount();
+			}
+		});
+		deleteCustomer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				admin.deleteCustomer();
+			}
+		});
+		deleteAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				admin.deleteAccount();
+			}
+		});
+		returnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				button.returnButton();
+			}
+		});		
+	}
+
 	public void customer(Customer e) {	
 		CustomerContinued custContinued = new CustomerContinued();
 		userTypeFrame = new JFrame("Customer Menu");

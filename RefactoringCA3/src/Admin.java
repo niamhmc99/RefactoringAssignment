@@ -55,7 +55,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 					}
 					if(found == false)
 					{
-						int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
+						int reply = noticeYesNo(" User not found. Try again?");
 						if (reply == JOptionPane.YES_OPTION) {
 							loop = true;
 						} else if(reply == JOptionPane.NO_OPTION){
@@ -167,7 +167,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 					}
 					if(found == false)
 					{
-						int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
+						int reply  = noticeYesNo( "User not found. Try again?");
 						if (reply == JOptionPane.YES_OPTION) {
 							loop = true;
 						} else if(reply == JOptionPane.NO_OPTION) {
@@ -272,7 +272,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 						}					    	
 					}
 					if(found == false) {
-						int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
+						int reply  = noticeYesNo ( "User not found. Try again?");
 						if (reply == JOptionPane.YES_OPTION) {
 							loop = true;
 						} else if(reply == JOptionPane.NO_OPTION) {
@@ -545,7 +545,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 					    }
 					    
 					    if(found == false) {
-					    	int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
+					    	int reply  = noticeYesNo("User not found. Try again?");
 					    	if (reply == JOptionPane.YES_OPTION) {
 					    	} else if(reply == JOptionPane.NO_OPTION){
 					    		menu.userTypeFrame.dispose();
@@ -592,6 +592,10 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 				System.exit(0);
 			}
 		});
+	}
+	
+	public int noticeYesNo(String showThis) {
+		return JOptionPane.showConfirmDialog(null, null, showThis, JOptionPane.YES_NO_OPTION);
 	}
 	
     private void setCustomerDetails(int position) {
