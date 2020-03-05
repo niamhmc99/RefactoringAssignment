@@ -250,19 +250,14 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 		    }
 		  }
 		}	
-   
-	
 
 	public void editCustomer() {
-			
 			boolean loop = true;
 			boolean found = false;
 		
-			if(customerList.isEmpty())
-			{
+			if(customerList.isEmpty()) {
 				CustomerListEmpty();
-			} else
-			{
+			} else {
 				while(loop)
 				{
 					Object customerID = JOptionPane.showInputDialog(menu.userTypeFrame, "Enter Customer ID:");
@@ -275,16 +270,13 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 							menu.customer = aCustomer;
 						}					    	
 					}
-					if(found == false)
-					{
+					if(found == false) {
 						int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
 						if (reply == JOptionPane.YES_OPTION) {
 							loop = true;
 						} else if(reply == JOptionPane.NO_OPTION) {
-							menu.userTypeFrame.dispose();
 							loop = false;
-		    	
-							menu.admin();
+							button.returnAdmin();
 						}
 					} else {
 						loop = false;
@@ -292,7 +284,6 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 				}
 			
 			menu.userTypeFrame.dispose();
-			
 			menu.userTypeFrame.dispose();
 			menu.userTypeFrame = new JFrame("Administrator Menu");
 			menu.userTypeFrame.setSize(400, 300);
@@ -313,7 +304,6 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 			menu.passwordTextField = new JTextField(20);
 			
 			textPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		
 			cancelPanel = new JPanel();
 			
 			textPanel.add(menu.firstNameLabel);
@@ -409,7 +399,6 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 					}				
 				}				
 			}
-			
 			textPanel.add(textArea);			
 			
 			Container content = menu.userTypeFrame.getContentPane();
@@ -425,7 +414,6 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 	
 	public void navigate() {
 		menu.userTypeFrame.dispose();
-			
 			if(customerList.isEmpty())
 			{
 				CustomerListEmpty();
@@ -458,13 +446,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 			next = new JButton("Next");
 			last = new JButton("Last");
 			cancel = new JButton("Cancel");
-			
-			menu.firstNameTextField.setText(customerList.get(0).getFirstName());
-			menu.surnameTextField.setText(customerList.get(0).getSurname());
-			menu.pPSTextField.setText(customerList.get(0).getPPS());
-			menu.dOBTextField.setText(customerList.get(0).getDOB());
-			menu.customerIDTextField.setText(customerList.get(0).getCustomerID());
-			menu.passwordTextField.setText(customerList.get(0).getPassword());
+			setCustomerDetails(0);
 			
 			menu.firstNameTextField.setEditable(false);
 			menu.surnameTextField.setEditable(false);
@@ -500,60 +482,29 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 			first.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {
 					menu.position = 0;
-					menu.firstNameTextField.setText(customerList.get(0).getFirstName());
-					menu.surnameTextField.setText(customerList.get(0).getSurname());
-					menu.pPSTextField.setText(customerList.get(0).getPPS());
-					menu.dOBTextField.setText(customerList.get(0).getDOB());
-					menu.customerIDTextField.setText(customerList.get(0).getCustomerID());
-					menu.passwordTextField.setText(customerList.get(0).getPassword());				
-						}		
-				     });
-			
+					setCustomerDetails(0);			
+				}		
+			});
 			previous.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {
-					if(menu.position < 1)
-					{
-					} else {
+					if(menu.position >= 1) {
 						menu.position = menu.position - 1;
-				
-						menu.firstNameTextField.setText(customerList.get(menu.position).getFirstName());
-						menu.surnameTextField.setText(customerList.get(menu.position).getSurname());
-						menu.pPSTextField.setText(customerList.get(menu.position).getPPS());
-						menu.dOBTextField.setText(customerList.get(menu.position).getDOB());
-						menu.customerIDTextField.setText(customerList.get(menu.position).getCustomerID());
-						menu.passwordTextField.setText(customerList.get(menu.position).getPassword());	
+						setCustomerDetails(menu.position);
 					}			
 				}		
 			});
-			
 			next.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {
-					if(menu.position == customerList.size()-1)
-					{
-					} else {
+					if(menu.position != customerList.size()-1) {
 						menu.position = menu.position + 1;
-						
-						menu.firstNameTextField.setText(customerList.get(menu.position).getFirstName());
-						menu.surnameTextField.setText(customerList.get(menu.position).getSurname());
-						menu.pPSTextField.setText(customerList.get(menu.position).getPPS());
-						menu.dOBTextField.setText(customerList.get(menu.position).getDOB());
-						menu.customerIDTextField.setText(customerList.get(menu.position).getCustomerID());
-						menu.passwordTextField.setText(customerList.get(menu.position).getPassword());	
+						setCustomerDetails(menu.position);
 					}		
 				}		
 			});
-			
 			last.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {
-				
 					menu.position = customerList.size() - 1;
-			
-					menu.firstNameTextField.setText(customerList.get(menu.position).getFirstName());
-					menu.surnameTextField.setText(customerList.get(menu.position).getSurname());
-					menu.pPSTextField.setText(customerList.get(menu.position).getPPS());
-					menu.dOBTextField.setText(customerList.get(menu.position).getDOB());
-					menu.customerIDTextField.setText(customerList.get(menu.position).getCustomerID());
-					menu.passwordTextField.setText(customerList.get(menu.position).getPassword());								
+					setCustomerDetails(menu.position);							
 						}		
 				     });
 			
@@ -562,14 +513,12 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 					button.returnAdmin();
 				}		
 			});		
-			
 			setContentPane(content);
 			setSize(400, 300);
 		    setVisible(true);
 			}		
 		}
 
-	
 	public void createAccount() {
 			menu.userTypeFrame.dispose();
 			if(customerList.isEmpty())
@@ -709,8 +658,6 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 					    }  
 					}
 			}
-				
-	
 
 	public void CustomerListEmpty() {
 		JOptionPane.showMessageDialog(Menu.jFrame, "There are no customers yet!", "Oops!", JOptionPane.INFORMATION_MESSAGE);
@@ -741,4 +688,13 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 			}
 		});
 	}
+	
+    private void setCustomerDetails(int position) {
+        menu.firstNameTextField.setText(customerList.get(position).getFirstName());
+        menu.surnameTextField.setText(customerList.get(position).getSurname());
+        menu.pPSTextField.setText(customerList.get(position).getPPS());
+        menu.dOBTextField.setText(customerList.get(position).getDOB());
+        menu.customerIDTextField.setText(customerList.get(position).getCustomerID());
+        menu.passwordTextField.setText(customerList.get(position).getPassword());
+    }
 }

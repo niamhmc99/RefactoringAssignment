@@ -221,6 +221,11 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 			});		
 		}
 		
+	
+	public void setCustomerDetails() {
+		
+	}
+	
 	@Override
 	public void closeWindow() {
     	menu.userTypeFrame.addWindowListener(new WindowAdapter() {
