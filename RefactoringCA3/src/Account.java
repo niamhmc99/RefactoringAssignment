@@ -1,10 +1,8 @@
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 public class Account extends Admin{
 
-	
 public void newAccount() {
 	menu.userTypeFrame.dispose();
 	

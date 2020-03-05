@@ -35,7 +35,6 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 			userTypeFrame.setSize(400, 300);
 			userTypeFrame.setLocation(200, 200);
 			closeWindow();
-
 			userTypePanel = new JPanel();
 			final ButtonGroup userType = new ButtonGroup();
 			JRadioButton radioButton;
@@ -52,7 +51,7 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 			userType.add(radioButton);
 
 			continuePanel = new JPanel();
-			 continueButton = new JButton("Continue");
+			continueButton = new JButton("Continue");
 			continuePanel.add(continueButton);
 
 			Container content = userTypeFrame.getContentPane();
@@ -80,10 +79,6 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 	
 	public void admin()
 	{
-		Admin admin = new Admin();
-		MenuButtons button = new MenuButtons();
-		dispose();
-		
 		userTypeFrame = new JFrame("Administrator Menu");
 		userTypeFrame.setSize(400, 400);
 		userTypeFrame.setLocation(200, 200);
@@ -135,7 +130,6 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 		returnPanel.add(returnButton);
 
 		label1 = new JLabel("Please select an option");
-		
 		content = userTypeFrame.getContentPane();
 		content.setLayout(new GridLayout(9, 1));
 		content.add(label1);
@@ -147,59 +141,7 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 		content.add(summaryPanel);	
 		content.add(deleteCustomerPanel);
 		content.add(returnPanel);
-		
-		bankChargesButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				admin.bankCharges();
-			}
-		});
-
-		interestButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				admin.interest();
-			}
-		});
-
-		editCustomerButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				admin.editCustomer();
-			}
-		});
-
-		summaryButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				admin.summary();
-			}
-		});
-
-		navigateButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				admin.navigate();
-			}
-		});
-
-		accountButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				admin.createAccount();
-			}
-		});
-
-		deleteCustomer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				admin.deleteCustomer();
-			}
-		});
-
-		deleteAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				admin.deleteAccount();
-			}
-		});
-		returnButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				button.returnButton();
-			}
-		});
+		adminActionListener();
 	}
 	
 	public void customer(Customer e) {	
