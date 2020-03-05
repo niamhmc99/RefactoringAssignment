@@ -30,7 +30,8 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 	JLabel label1;
 	JTextArea textArea;
 	JButton cancelBtn, saveBtn;
-
+	Account account;
+	
 	public void bankCharges() {
 			boolean loop = true;
 			boolean found = false;
@@ -520,90 +521,22 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 		}
 
 	public void createAccount() {
-			menu.userTypeFrame.dispose();
-			if(customerList.isEmpty())
-			{
-				CustomerListEmpty();
-			} else {
-				boolean loop = true;
-				boolean found = false;
-		
-			while(loop)
-		    {
-				Object customerID = JOptionPane.showInputDialog(menu.userTypeFrame, "Customer ID of Customer You Wish to Add an Account to:");
-		    
-					for (Customer aCustomer: customerList){
-						if(aCustomer.getCustomerID().equals(customerID))
-						{
-							found = true;
-							menu.customer = aCustomer; 	
-						}					    	
-					}
-					if(found == false){
-						int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
-							
-						if (reply == JOptionPane.YES_OPTION) {
-							loop = true;
-						}
-						else if(reply == JOptionPane.NO_OPTION)
-						{
-							menu.userTypeFrame.dispose();
-							loop = false;
-							menu.admin();
-						}
-					} else {
-						loop = false;
-						String[] choices = { "Current Account", "Deposit Account" };
-						String account = (String) JOptionPane.showInputDialog(null, "Please choose account type",
-								"Account Type", JOptionPane.QUESTION_MESSAGE, null, choices, choices[1]); 
-			    
-						if(account.equals("Current Account"))
-						{
-							boolean valid = true;
-							double balance = 0;
-							String number = String.valueOf("C" + (customerList.indexOf(menu.customer)+1) * 10 + (menu.customer.getAccounts().size()+1));//this simple algorithm generates the account number
-							ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
-							int randomPIN = (int)(Math.random()*9000)+1000;
-							String pin = String.valueOf(randomPIN);
-			    
-							ATMCard atm = new ATMCard(randomPIN, valid);
-							CustomerCurrentAccount current = new CustomerCurrentAccount(atm, number, balance, transactionList);
-			    	
-							menu.customer.getAccounts().add(current);
-							JOptionPane.showMessageDialog(menu.userTypeFrame, "Account number = " + number +"\n PIN = " + pin  ,"Account created.",  JOptionPane.INFORMATION_MESSAGE);
-							menu.userTypeFrame.dispose();
-							menu.admin();
-						}
-						if(account.equals("Deposit Account"))
-						{			    	
-							double balance = 0, interest = 0;
-							String number = String.valueOf("D" + (customerList.indexOf(menu.customer)+1) * 10 + (menu.customer.getAccounts().size()+1));//this simple algorithm generates the account number
-							ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
-			        	
-							CustomerDepositAccount deposit = new CustomerDepositAccount(interest, number, balance, transactionList);
-							menu.customer.getAccounts().add(deposit);
-							JOptionPane.showMessageDialog(menu.userTypeFrame, "Account number = " + number ,"Account created.",  JOptionPane.INFORMATION_MESSAGE);
-			    		
-							menu.userTypeFrame.dispose();
-							menu.admin();
-						}
-					}			   
-		    	}
-			}
-		}
+			account.newAccount();
+	}
+	
+	public void deleteAccount() {
+		account.deleteAccount();
+	}
 
-		public void deleteCustomer() {
-			boolean found = true;
+	public void deleteCustomer() {
+		boolean found = true;
 			
-			if(customerList.isEmpty())
-			{
+			if(customerList.isEmpty()){
 				CustomerListEmpty();
 			} else {
-				 {
-					    Object customerID = JOptionPane.showInputDialog(menu.userTypeFrame, "Customer ID of Customer You Wish to Delete:");
+			    Object customerID = JOptionPane.showInputDialog(menu.userTypeFrame, "Customer ID of Customer You Wish to Delete:");
 					    
 					    for (Customer aCustomer: customerList){
-					    	
 					    	if(aCustomer.getCustomerID().equals(customerID))
 					    	{
 					    		found = true;
@@ -611,8 +544,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 					    	}					    	
 					    }
 					    
-					    if(found == false)
-					    {
+					    if(found == false) {
 					    	int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
 					    	if (reply == JOptionPane.YES_OPTION) {
 					    	} else if(reply == JOptionPane.NO_OPTION){
@@ -626,38 +558,11 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 					    	} else {
 					    		customerList.remove(menu.customer);
 					    		JOptionPane.showMessageDialog(menu.userTypeFrame, "Customer Deleted " ,"Success.",  JOptionPane.INFORMATION_MESSAGE);
+					    		}
 					    	}
-					    }
-				 }  
-				 }
-			}
-	
-	
-			public void deleteAccount() {
-				boolean found = true, loop = true;
-					{
-					    Object customerID = JOptionPane.showInputDialog(menu.userTypeFrame, "Customer ID of Customer from which you wish to delete an account");
-					    for (Customer aCustomer: customerList){
-					    	if(aCustomer.getCustomerID().equals(customerID))
-					    	{
-					    		found = true;
-					    		menu.customer = aCustomer; 
-					    		loop = false;
-					    	}					    	
-					    }
-					    if(found == false)
-					    {
-					    	int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
-					    	if (reply == JOptionPane.YES_OPTION) {
-					    		loop = true;
-					    	} else if(reply == JOptionPane.NO_OPTION) {
-					    		menu.userTypeFrame.dispose();
-					    		loop = false;
-					    		menu.admin();
-					    	}
-					    }  
-					}
-			}
+			}  
+	}
+		
 
 	public void CustomerListEmpty() {
 		JOptionPane.showMessageDialog(Menu.jFrame, "There are no customers yet!", "Oops!", JOptionPane.INFORMATION_MESSAGE);
