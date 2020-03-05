@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -20,7 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class Admin extends JFrame implements CloseWindow{
+public class Admin extends JFrame implements CommonWindowFunctions{
 
 	private static final long serialVersionUID = 1L;
 	ArrayList<Customer> customerList = Menu.returnArray();
@@ -34,17 +32,13 @@ public class Admin extends JFrame implements CloseWindow{
 	JButton cancelBtn, saveBtn;
 
 	public void bankCharges() {
-		
-			
 			boolean loop = true;
 			boolean found = false;
 		
 			if(customerList.isEmpty())
 			{
 				CustomerListEmpty();	
-			}
-			else
-			{
+			} else {
 				while(loop)
 				{
 					Object customerID = JOptionPane.showInputDialog(menu.userTypeFrame, "Customer ID of Customer You Wish to Apply Charges to:");
@@ -58,29 +52,23 @@ public class Admin extends JFrame implements CloseWindow{
 							loop = false;
 						}					    	
 					}
-		    
 					if(found == false)
 					{
 						int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
 						if (reply == JOptionPane.YES_OPTION) {
 							loop = true;
-						}
-						else if(reply == JOptionPane.NO_OPTION)
-						{
+						} else if(reply == JOptionPane.NO_OPTION){
 							menu.userTypeFrame.dispose();
 							loop = false;
 							button.returnAdmin();
 						}
-					}  
-					else
-					{
+					} else {
 						menu.userTypeFrame.dispose();
 						menu.userTypeFrame = new JFrame("Administrator Menu");
 						menu.userTypeFrame.setSize(400, 300);
 						menu.userTypeFrame.setLocation(200, 200);
 						closeWindow();        
 						menu.userTypeFrame.setVisible(true);
-			
 			
 						JComboBox<String> box = new JComboBox<String>();
 						for (int i =0; i < menu.customer.getAccounts().size(); i++)
@@ -90,8 +78,6 @@ public class Admin extends JFrame implements CloseWindow{
 				
 			    
 			     box.getSelectedItem();
-			     
-			
 			     boxPanel = new JPanel();
 				 boxPanel.add(box);
 
@@ -106,16 +92,13 @@ public class Admin extends JFrame implements CloseWindow{
 				
 			   	 content.add(boxPanel);
 			   	 content.add(buttonPanel);
-				
 		
 					if(menu.customer.getAccounts().isEmpty())
 					{
 						JOptionPane.showMessageDialog(menu.userTypeFrame, "This customer has no accounts! \n The admin must add acounts to this customer."   ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
 						menu.userTypeFrame.dispose();
 						button.returnAdmin();
-					}
-					else
-					{
+					} else {
 					
 						for(int i = 0; i < menu.customer.getAccounts().size(); i++)
 						{
@@ -124,7 +107,6 @@ public class Admin extends JFrame implements CloseWindow{
 								acc = menu.customer.getAccounts().get(i);
 							}
 						}
-									
 					continueButton.addActionListener(new ActionListener(  ) {
 					public void actionPerformed(ActionEvent ae) {
 						String euro = "\u20ac";
@@ -158,22 +140,17 @@ public class Admin extends JFrame implements CloseWindow{
 				}
 			}
 		    }
-		
-     
-	
+
 	public void interest(){
 
 			boolean loop = true;
-			
 			boolean found = false;
 		
 			if(customerList.isEmpty())
 			{
 				CustomerListEmpty();
 				
-			}
-			else
-			{
+			} else {
 				while(loop)
 				{
 					Object customerID = JOptionPane.showInputDialog(menu.userTypeFrame, "Customer ID of Customer You Wish to Apply Interest to:");
@@ -187,30 +164,23 @@ public class Admin extends JFrame implements CloseWindow{
 							loop = false;
 						}					    	
 					}
-		    
 					if(found == false)
 					{
 						int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
 						if (reply == JOptionPane.YES_OPTION) {
 							loop = true;
-						}
-						else if(reply == JOptionPane.NO_OPTION)
-						{
+						} else if(reply == JOptionPane.NO_OPTION) {
 							menu.userTypeFrame.dispose();
 							loop = false;
-		    	
 							menu.admin();
 						}
-					}  
-					else
-					{
+					} else {
 						menu.userTypeFrame.dispose();
 						menu.userTypeFrame = new JFrame("Administrator Menu");
 						menu.userTypeFrame.setSize(400, 300);
 						menu.userTypeFrame.setLocation(200, 200);
 						closeWindow();                 
 						menu.userTypeFrame.setVisible(true);
-			
 			
 						JComboBox<String> box = new JComboBox<String>();
 						for (int i =0; i < menu.customer.getAccounts().size(); i++)
@@ -220,7 +190,6 @@ public class Admin extends JFrame implements CloseWindow{
 				
 			    
 			    box.getSelectedItem();
-			
 			    boxPanel = new JPanel();
 				
 				JLabel label = new JLabel("Select an account to apply interest to:");
@@ -236,14 +205,10 @@ public class Admin extends JFrame implements CloseWindow{
 				
 				content.add(boxPanel);
 				content.add(buttonPanel);
-				
-		
-					if(menu.customer.getAccounts().isEmpty())
+				if(menu.customer.getAccounts().isEmpty())
 					{
 						CustomerAccountsEmpty();
-					}
-					else
-					{
+					} else {
 					
 						for(int i = 0; i < menu.customer.getAccounts().size(); i++)
 						{
@@ -264,18 +229,14 @@ public class Admin extends JFrame implements CloseWindow{
 					 	{
 					 		String interestString = JOptionPane.showInputDialog(menu.userTypeFrame, "Enter interest percentage you wish to apply: \n NOTE: Please enter a numerical value. (with no percentage sign) \n E.g: If you wish to apply 8% interest, enter '8'");//the isNumeric method tests to see if the string entered was numeric. 
 					 			if(isNumeric(interestString)) {
-					 			interest = Double.parseDouble(interestString);
-								loop = false;
-							
-								acc.setBalance(acc.getBalance() + (acc.getBalance() * (interest/100)));
-								JOptionPane.showMessageDialog(menu.userTypeFrame, interest + "% interest applied. \n new balance = " + acc.getBalance() + euro ,"Success!",  JOptionPane.INFORMATION_MESSAGE);
+					 				interest = Double.parseDouble(interestString);
+					 				loop = false;
+					 				acc.setBalance(acc.getBalance() + (acc.getBalance() * (interest/100)));
+					 				JOptionPane.showMessageDialog(menu.userTypeFrame, interest + "% interest applied. \n new balance = " + acc.getBalance() + euro ,"Success!",  JOptionPane.INFORMATION_MESSAGE);
+					 			} else {
+					 				JOptionPane.showMessageDialog(menu.userTypeFrame, "You must enter a numerical value!" ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
 					 			}
-					 			else
-					 			{
-							JOptionPane.showMessageDialog(menu.userTypeFrame, "You must enter a numerical value!" ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
-					 			}
-					 	}
-					 	button.returnAdmin();				
+					 	} button.returnAdmin();				
 					}		
 			     });
 				
@@ -284,11 +245,10 @@ public class Admin extends JFrame implements CloseWindow{
 						button.returnButton();				
 					}
 			     });	
-				
 					}
+				}
 		    }
-		    }
-		    }
+		  }
 		}	
    
 	
@@ -296,7 +256,6 @@ public class Admin extends JFrame implements CloseWindow{
 	public void editCustomer() {
 			
 			boolean loop = true;
-		
 			boolean found = false;
 		
 			if(customerList.isEmpty())
@@ -316,26 +275,20 @@ public class Admin extends JFrame implements CloseWindow{
 							menu.customer = aCustomer;
 						}					    	
 					}
-		    
 					if(found == false)
 					{
 						int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
 						if (reply == JOptionPane.YES_OPTION) {
 							loop = true;
-						}
-						else if(reply == JOptionPane.NO_OPTION)
-						{
+						} else if(reply == JOptionPane.NO_OPTION) {
 							menu.userTypeFrame.dispose();
 							loop = false;
 		    	
 							menu.admin();
 						}
-					}
-					else
-					{
+					} else {
 						loop = false;
 					}
-		   
 				}
 			
 			menu.userTypeFrame.dispose();
@@ -402,17 +355,15 @@ public class Admin extends JFrame implements CloseWindow{
 			
 			saveBtn.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {
-				
 					menu.customer.setFirstName(menu.firstNameTextField.getText());
 					menu.customer.setSurname(menu.surnameTextField.getText());
 					menu.customer.setPPS(menu.pPSTextField.getText());
 					menu.customer.setDOB(menu.dOBTextField.getText());
 					menu.customer.setCustomerID(menu.customerIDTextField.getText());
 					menu.customer.setPassword(menu.passwordTextField.getText());		
-					
 					JOptionPane.showMessageDialog(null, "Changes Saved.");
-						}		
-				     });
+				}		
+			});
 			
 			cancelBtn.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {
@@ -424,7 +375,6 @@ public class Admin extends JFrame implements CloseWindow{
 	
 	public void summary() {
 		menu.userTypeFrame.dispose();
-			
 		menu.userTypeFrame = new JFrame("Summary of Transactions");
 		menu.userTypeFrame.setSize(400, 700);
 		menu.userTypeFrame.setLocation(200, 200);
@@ -438,7 +388,6 @@ public class Admin extends JFrame implements CloseWindow{
 			returnPanel.add(returnButton);
 			
 			textPanel = new JPanel();
-			
 			textPanel.setLayout( new BorderLayout() );
 			textArea = new JTextArea(40, 20);
 			textArea.setEditable(false);
@@ -473,7 +422,6 @@ public class Admin extends JFrame implements CloseWindow{
 				}		
 		     });	
 		}	
-;
 	
 	public void navigate() {
 		menu.userTypeFrame.dispose();
@@ -623,9 +571,7 @@ public class Admin extends JFrame implements CloseWindow{
 
 	
 	public void createAccount() {
-		
 			menu.userTypeFrame.dispose();
-			
 			if(customerList.isEmpty())
 			{
 				CustomerListEmpty();
@@ -672,16 +618,13 @@ public class Admin extends JFrame implements CloseWindow{
 							String pin = String.valueOf(randomPIN);
 			    
 							ATMCard atm = new ATMCard(randomPIN, valid);
-			    	
 							CustomerCurrentAccount current = new CustomerCurrentAccount(atm, number, balance, transactionList);
 			    	
 							menu.customer.getAccounts().add(current);
 							JOptionPane.showMessageDialog(menu.userTypeFrame, "Account number = " + number +"\n PIN = " + pin  ,"Account created.",  JOptionPane.INFORMATION_MESSAGE);
-			    	
 							menu.userTypeFrame.dispose();
 							menu.admin();
 						}
-			    
 						if(account.equals("Deposit Account"))
 						{			    	
 							double balance = 0, interest = 0;
@@ -689,7 +632,6 @@ public class Admin extends JFrame implements CloseWindow{
 							ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
 			        	
 							CustomerDepositAccount deposit = new CustomerDepositAccount(interest, number, balance, transactionList);
-			    	
 							menu.customer.getAccounts().add(deposit);
 							JOptionPane.showMessageDialog(menu.userTypeFrame, "Account number = " + number ,"Account created.",  JOptionPane.INFORMATION_MESSAGE);
 			    		
@@ -700,7 +642,6 @@ public class Admin extends JFrame implements CloseWindow{
 		    	}
 			}
 		}
-		
 
 		public void deleteCustomer() {
 			boolean found = true;
@@ -739,7 +680,6 @@ public class Admin extends JFrame implements CloseWindow{
 					    	}
 					    }
 				 }  
-					    
 				 }
 			}
 	
@@ -748,9 +688,7 @@ public class Admin extends JFrame implements CloseWindow{
 				boolean found = true, loop = true;
 					{
 					    Object customerID = JOptionPane.showInputDialog(menu.userTypeFrame, "Customer ID of Customer from which you wish to delete an account");
-					    
 					    for (Customer aCustomer: customerList){
-					    	
 					    	if(aCustomer.getCustomerID().equals(customerID))
 					    	{
 					    		found = true;
@@ -758,22 +696,17 @@ public class Admin extends JFrame implements CloseWindow{
 					    		loop = false;
 					    	}					    	
 					    }
-					    
 					    if(found == false)
 					    {
 					    	int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
 					    	if (reply == JOptionPane.YES_OPTION) {
 					    		loop = true;
-					    	}
-					    	else if(reply == JOptionPane.NO_OPTION)
-					    	{
+					    	} else if(reply == JOptionPane.NO_OPTION) {
 					    		menu.userTypeFrame.dispose();
 					    		loop = false;
-					    	
 					    		menu.admin();
 					    	}
 					    }  
-					   
 					}
 			}
 				
@@ -800,9 +733,6 @@ public class Admin extends JFrame implements CloseWindow{
 		}
 		return true;
 	}
-
-
-
 	@Override
 	public void closeWindow() {
 		menu.userTypeFrame.addWindowListener(new WindowAdapter() {
@@ -811,12 +741,4 @@ public class Admin extends JFrame implements CloseWindow{
 			}
 		});
 	}
-
-
-
 }
-
-
-	
-
-

@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class CustomerFunctionality extends JFrame implements CloseWindow{
+public class CustomerFunctionality extends JFrame implements CommonWindowFunctions{
 	
 	ArrayList<Customer> customerList = Menu.returnArray();
 	Menu menu = new Menu();
@@ -109,8 +109,8 @@ public class CustomerFunctionality extends JFrame implements CloseWindow{
 					count --;
 					JOptionPane.showMessageDialog( menu.userTypeFrame, "Incorrect pin. " + count + " attempts remaining."  ,"Pin",  JOptionPane.INFORMATION_MESSAGE);					
 				}
-			   }
-			}
+			  }
+		   }
 		}		
 		
 		if(on == true)
@@ -120,9 +120,7 @@ public class CustomerFunctionality extends JFrame implements CloseWindow{
 			{
 				balance = Double.parseDouble(balanceTest);
 				loop = false;
-			}
-			else
-			{
+			} else {
 				JOptionPane.showMessageDialog( menu.userTypeFrame, "You must enter a numerical value!" ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
 			}
 			
@@ -176,8 +174,8 @@ public class CustomerFunctionality extends JFrame implements CloseWindow{
 						count --;
 						JOptionPane.showMessageDialog( menu.userTypeFrame, "Incorrect pin. " + count + " attempts remaining."  ,"Pin",  JOptionPane.INFORMATION_MESSAGE);		
 					  }
-				   }
-				}
+				  }
+			   }
 			}	
 			
 			if(on == true)
@@ -203,7 +201,6 @@ public class CustomerFunctionality extends JFrame implements CloseWindow{
 			
 			 String euro = "\u20ac";
 			 menu.acc.setBalance( menu.acc.getBalance()-withdraw);
-		//		String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 			 Date date = new Date();
 			 String date2 = date.toString();
 			 
@@ -216,8 +213,6 @@ public class CustomerFunctionality extends JFrame implements CloseWindow{
 			 JOptionPane.showMessageDialog( menu.userTypeFrame, withdraw + euro + " withdrawn." ,"Withdraw",  JOptionPane.INFORMATION_MESSAGE);
 			 JOptionPane.showMessageDialog( menu.userTypeFrame, "New balance = " +  menu.acc.getBalance() + euro ,"Withdraw",  JOptionPane.INFORMATION_MESSAGE);
 			}	
-			
-
 	
 			returnButton.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {
@@ -244,9 +239,6 @@ public class CustomerFunctionality extends JFrame implements CloseWindow{
     		    return false;  
     		  }  
     		  return true;  			
-	}	
-    
-    
-  
+	}
 }
 

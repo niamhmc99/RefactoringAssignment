@@ -1,5 +1,5 @@
 
-public interface CloseWindow {
+public interface CommonWindowFunctions {
 
 	public void closeWindow();
 

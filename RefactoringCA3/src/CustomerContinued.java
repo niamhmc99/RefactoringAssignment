@@ -15,7 +15,6 @@ public class CustomerContinued {
 	JLabel label;
 	JPanel statementPanel, lodgementPanel, withdrawalPanel, returnPanel;
 	JButton  statementButton, lodgementButton, withdrawButton, returnButton;
-	
 	public void customerContinue() {
 		
 		Menu menu = new Menu();
@@ -26,7 +25,6 @@ public class CustomerContinued {
 			menu.userTypeFrame = new JFrame("Customer Menu");
 			menu.userTypeFrame.setSize(400, 300);
 			menu.userTypeFrame.setLocation(200, 200);
-			
 			menu.userTypeFrame.addWindowListener(new WindowAdapter() {
 				public void windowClosing(WindowEvent we) { System.exit(0); }
 			});          
@@ -53,7 +51,6 @@ public class CustomerContinued {
 			menu.returnPanel.add(returnButton);
 
 			label = new JLabel("Please select an option");
-	
 			menu.content = menu.userTypeFrame.getContentPane();
 			menu.content.setLayout(new GridLayout(5, 1));
 			menu.content.add(label);
