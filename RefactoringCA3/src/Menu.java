@@ -222,14 +222,11 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 		
 			JComboBox<String> box = new JComboBox<String>();
 			
-			for (int i =0; i < customer.getAccounts().size(); i++)
-			{
+			for (int i =0; i < customer.getAccounts().size(); i++) {
 				box.addItem(customer.getAccounts().get(i).getNumber());
 			}
-			for(int i = 0; i<customer.getAccounts().size(); i++)
-			{
-				if(customer.getAccounts().get(i).getNumber() == box.getSelectedItem() )
-	    		{
+			for(int i = 0; i<customer.getAccounts().size(); i++) {
+				if(customer.getAccounts().get(i).getNumber() == box.getSelectedItem() ) {
 					acc = customer.getAccounts().get(i);
 	    		}
 			}
@@ -266,9 +263,7 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 	@Override
 	public void closeWindow() {
 		userTypeFrame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent we) {
-				System.exit(0);
-			}
+			public void windowClosing(WindowEvent we) { System.exit(0); }
 		});		
 	}
 	

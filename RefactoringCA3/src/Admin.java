@@ -36,25 +36,19 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 			boolean loop = true;
 			boolean found = false;
 		
-			if(customerList.isEmpty())
-			{
+			if(customerList.isEmpty()) {
 				CustomerListEmpty();	
 			} else {
-				while(loop)
-				{
+				while(loop){
 					Object customerID = JOptionPane.showInputDialog(menu.userTypeFrame, "Customer ID of Customer You Wish to Apply Charges to:");
 		    
 					for (Customer aCustomer: customerList){
-		    	
-						if(aCustomer.getCustomerID().equals(customerID))
-						{
+						if(aCustomer.getCustomerID().equals(customerID)) {
 							found = true;
 							menu.customer = aCustomer; 
 							loop = false;
 						}					    	
-					}
-					if(found == false)
-					{
+					} if(found == false) {
 						int reply = noticeYesNo(" User not found. Try again?");
 						if (reply == JOptionPane.YES_OPTION) {
 							loop = true;
@@ -72,12 +66,10 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 						menu.userTypeFrame.setVisible(true);
 			
 						JComboBox<String> box = new JComboBox<String>();
-						for (int i =0; i < menu.customer.getAccounts().size(); i++)
-						{
+						for (int i =0; i < menu.customer.getAccounts().size(); i++) {
 							box.addItem(menu.customer.getAccounts().get(i).getNumber());
 						}
 				
-			    
 			     box.getSelectedItem();
 			     boxPanel = new JPanel();
 				 boxPanel.add(box);
@@ -90,21 +82,17 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 				 
 				 Container content = menu.userTypeFrame.getContentPane();
 			   	 content.setLayout(new GridLayout(2, 1));
-				
 			   	 content.add(boxPanel);
 			   	 content.add(buttonPanel);
 		
-					if(menu.customer.getAccounts().isEmpty())
-					{
+					if(menu.customer.getAccounts().isEmpty()) {
 						JOptionPane.showMessageDialog(menu.userTypeFrame, "This customer has no accounts! \n The admin must add acounts to this customer."   ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
 						menu.userTypeFrame.dispose();
 						button.returnAdmin();
 					} else {
 					
-						for(int i = 0; i < menu.customer.getAccounts().size(); i++)
-						{
-							if(menu.customer.getAccounts().get(i).getNumber() == box.getSelectedItem() )
-							{
+						for(int i = 0; i < menu.customer.getAccounts().size(); i++) {
+							if(menu.customer.getAccounts().get(i).getNumber() == box.getSelectedItem() ) {
 								acc = menu.customer.getAccounts().get(i);
 							}
 						}
@@ -112,15 +100,13 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 					public void actionPerformed(ActionEvent ae) {
 						String euro = "\u20ac";
 	
-						if(acc instanceof CustomerDepositAccount)
-						{
+						if(acc instanceof CustomerDepositAccount) {
 							JOptionPane.showMessageDialog(menu.userTypeFrame, "25" + euro + " deposit account fee aplied."  ,"",  JOptionPane.INFORMATION_MESSAGE);
 							acc.setBalance(acc.getBalance()-25);
 							JOptionPane.showMessageDialog(menu.userTypeFrame, "New balance = " + acc.getBalance() ,"Success!",  JOptionPane.INFORMATION_MESSAGE);
 						}
 
-						if(acc instanceof CustomerCurrentAccount)
-						{
+						if(acc instanceof CustomerCurrentAccount) {
 							JOptionPane.showMessageDialog(menu.userTypeFrame, "15" + euro + " current account fee aplied."  ,"",  JOptionPane.INFORMATION_MESSAGE);
 							acc.setBalance(acc.getBalance()-25);
 							JOptionPane.showMessageDialog(menu.userTypeFrame, "New balance = " + acc.getBalance() ,"Success!",  JOptionPane.INFORMATION_MESSAGE);
@@ -138,22 +124,18 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 				
 					}
 					}
-				}
-			}
-		    }
+				}	}
+	}
 
 	public void interest(){
-
 			boolean loop = true;
 			boolean found = false;
 		
-			if(customerList.isEmpty())
-			{
+			if(customerList.isEmpty()) {
 				CustomerListEmpty();
 				
 			} else {
-				while(loop)
-				{
+				while(loop) {
 					Object customerID = JOptionPane.showInputDialog(menu.userTypeFrame, "Customer ID of Customer You Wish to Apply Interest to:");
 		    
 					for (Customer aCustomer: customerList){
@@ -165,8 +147,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 							loop = false;
 						}					    	
 					}
-					if(found == false)
-					{
+					if(found == false) {
 						int reply  = noticeYesNo( "User not found. Try again?");
 						if (reply == JOptionPane.YES_OPTION) {
 							loop = true;
@@ -211,23 +192,19 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 						CustomerAccountsEmpty();
 					} else {
 					
-						for(int i = 0; i < menu.customer.getAccounts().size(); i++)
-						{
-							if(menu.customer.getAccounts().get(i).getNumber() == box.getSelectedItem() )
-							{
+						for(int i = 0; i < menu.customer.getAccounts().size(); i++) {
+							if(menu.customer.getAccounts().get(i).getNumber() == box.getSelectedItem() ) {
 								acc = menu.customer.getAccounts().get(i);
 							}
 						}
 									
 					continueButton.addActionListener(new ActionListener(  ) {
-					
 						public void actionPerformed(ActionEvent ae) {
 							String euro = "\u20ac";
 							double interest = 0;
 							boolean loop = true;
 					 	
-					 	while(loop)
-					 	{
+					 	while(loop) {
 					 		String interestString = JOptionPane.showInputDialog(menu.userTypeFrame, "Enter interest percentage you wish to apply: \n NOTE: Please enter a numerical value. (with no percentage sign) \n E.g: If you wish to apply 8% interest, enter '8'");//the isNumeric method tests to see if the string entered was numeric. 
 					 			if(isNumeric(interestString)) {
 					 				interest = Double.parseDouble(interestString);
@@ -361,7 +338,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 					button.returnAdmin();				
 				}		
 		     });		
-			}}
+	}	}
 
 	
 	public void summary() {
@@ -373,7 +350,6 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 		menu.userTypeFrame.setVisible(true);
 			
 			label1 = new JLabel("Summary of all transactions: ");
-			
 			returnPanel = new JPanel();
 			returnButton = new JButton("Return");
 			returnPanel.add(returnButton);
@@ -389,13 +365,10 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			textPanel.add(scrollPane);
 			
-			for (int a = 0; a < customerList.size(); a++)//For each customer, for each account, it displays each transaction.
-			{
-				for (int b = 0; b < customerList.get(a).getAccounts().size(); b ++ )
-				{
+			for (int a = 0; a < customerList.size(); a++) {
+				for (int b = 0; b < customerList.get(a).getAccounts().size(); b ++ ) {
 					acc = customerList.get(a).getAccounts().get(b);
-					for (int c = 0; c < customerList.get(a).getAccounts().get(b).getTransactionList().size(); c++)
-					{
+					for (int c = 0; c < customerList.get(a).getAccounts().get(b).getTransactionList().size(); c++) {
 						textArea.append(acc.getTransactionList().get(c).toString());						
 					}				
 				}				
@@ -415,13 +388,11 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 	
 	public void navigate() {
 		menu.userTypeFrame.dispose();
-			if(customerList.isEmpty())
-			{
+			if(customerList.isEmpty()) {
 				CustomerListEmpty();
 			} else {
 				
 			JButton first, previous, next, last, cancel;
-
 			Container content = getContentPane();
 			content.setLayout(new BorderLayout());
 			
@@ -473,7 +444,6 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 			buttonPanel.add(previous);
 			buttonPanel.add(next);
 			buttonPanel.add(last);
-			
 			cancelPanel.add(cancel);
 	
 			content.add(gridPanel, BorderLayout.NORTH);
@@ -523,14 +493,12 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 	public void createAccount() {
 			account.newAccount();
 	}
-	
 	public void deleteAccount() {
 		account.deleteAccount();
 	}
 
 	public void deleteCustomer() {
 		boolean found = true;
-			
 			if(customerList.isEmpty()){
 				CustomerListEmpty();
 			} else {
@@ -563,7 +531,6 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 			}  
 	}
 		
-
 	public void CustomerListEmpty() {
 		JOptionPane.showMessageDialog(Menu.jFrame, "There are no customers yet!", "Oops!", JOptionPane.INFORMATION_MESSAGE);
 		button.returnAdmin();
@@ -575,25 +542,21 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 			JOptionPane.INFORMATION_MESSAGE);
 		button.returnAdmin();
 	}
-	
 	@Override
 	public boolean isNumeric(String str) {
 		try {
 			double d = Double.parseDouble(str);
 		} catch (NumberFormatException nfe) {
-			return false;
-		}
-		return true;
+				return false;
+		} return true;
 	}
+	
 	@Override
 	public void closeWindow() {
 		menu.userTypeFrame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent we) {
-				System.exit(0);
-			}
+			public void windowClosing(WindowEvent we) {	System.exit(0); }
 		});
 	}
-	
 	public int noticeYesNo(String showThis) {
 		return JOptionPane.showConfirmDialog(null, null, showThis, JOptionPane.YES_NO_OPTION);
 	}

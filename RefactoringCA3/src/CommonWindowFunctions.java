@@ -1,7 +1,7 @@
 
 public interface CommonWindowFunctions {
 
-	public void closeWindow();
+	void closeWindow();
 
 	boolean isNumeric(String str);
 }

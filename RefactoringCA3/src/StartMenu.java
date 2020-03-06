@@ -27,12 +27,10 @@ public class StartMenu {
 		menu.createNewCustomerFrame = new JFrame("Create New Customer");
 		menu.createNewCustomerFrame.setSize(400, 300);
 		menu.createNewCustomerFrame.setLocation(200, 200);
-		menu.createNewCustomerFrame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent we) { System.exit(0); }
-		});
-			Container content = menu.createNewCustomerFrame.getContentPane();
-			content.setLayout(new BorderLayout());
+		closeWindow();
 			
+		Container content = menu.createNewCustomerFrame.getContentPane();
+		content.setLayout(new BorderLayout());
 			menu.firstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
 			menu.surnameLabel = new JLabel("Surname:", SwingConstants.RIGHT);
 			menu.pPPSLabel = new JLabel("PPS Number:", SwingConstants.RIGHT);
@@ -55,7 +53,6 @@ public class StartMenu {
 			menu.add = new JButton("Add");
 			
 			menu.add.addActionListener(new ActionListener() {
-		
 				 public void actionPerformed(ActionEvent e) {
 					 
 					 menu.PPS = menu.pPSTextField.getText();
@@ -72,15 +69,12 @@ public class StartMenu {
 							 boolean passwordCorrect = true;
 							 while(passwordCorrect){
 								 String password = JOptionPane.showInputDialog(menu.userTypeFrame, "Enter 7 character Password;");
-				
-								 if(password.length() != 7)
-								 {
+								 if(password.length() != 7) {
 									 JOptionPane.showMessageDialog(null, null, "Password must be 7 charatcers long", JOptionPane.OK_OPTION);
 								 }else {
 									 passwordCorrect = false;
 								 }
 							 }
-				
 							 ArrayList<CustomerAccount> accounts = new ArrayList<CustomerAccount> ();
 							 Customer customer = new Customer(menu.PPS, menu.surname, menu.firstName, menu.DOB,
 										menu.CustomerID, menu.getPassword(), accounts);							
@@ -102,24 +96,18 @@ public class StartMenu {
 			
 			menu.panel2.add(menu.add);
 			menu.panel2.add(cancel);
-			
 			content.add(panel, BorderLayout.CENTER);
 			content.add(menu.panel2, BorderLayout.SOUTH);
-	
 			menu.createNewCustomerFrame.setVisible(true);		
-		
 	}
 
 	public void administrator() {
-
 		boolean checkAdminUsername = true, checkAdminPassword = true;
 		boolean cont = false;
-	    while(checkAdminUsername)
-	    {
+	    while(checkAdminUsername) {
 	    	Object adminUsername = JOptionPane.showInputDialog(menu.userTypeFrame, "Enter Administrator Username:");
 
-	    	if(!adminUsername.equals("admin"))
-	    	{
+	    	if(!adminUsername.equals("admin")) {
 	    		int reply  = JOptionPane.showConfirmDialog(null, null, "Incorrect Username. Try again?", JOptionPane.YES_NO_OPTION);
 	    		if (reply == JOptionPane.YES_OPTION) {
 	    			checkAdminUsername = true;
@@ -134,12 +122,9 @@ public class StartMenu {
 	    	}				    
 	    }
 	    
-	    while(checkAdminPassword)
-	    {
+	    while(checkAdminPassword) {
 	    	Object adminPassword = JOptionPane.showInputDialog(menu.userTypeFrame, "Enter Administrator Password;");
-	    	
-	    	   if(!adminPassword.equals("admin11"))
-			    {
+	    	   if(!adminPassword.equals("admin11")){
 			    	int reply  = JOptionPane.showConfirmDialog(null, null, "Incorrect Password. Try again?", JOptionPane.YES_NO_OPTION);
 			    	if (reply == JOptionPane.YES_OPTION) {
 			    		
@@ -162,18 +147,15 @@ public class StartMenu {
 	public void existingCustomer() {
 		Customer customer = null;
 		boolean checkCustomerId = true, checkCustomerPassword = true, cont = false, found = false;
-	  
 		while(checkCustomerId){
 	    	Object customerID = JOptionPane.showInputDialog(menu.userTypeFrame, "Enter Customer ID:");
 	    	for (Customer aCustomer: customerList){
-	    		if(aCustomer.getCustomerID().equals(customerID))
-	    		{
+	    		if(aCustomer.getCustomerID().equals(customerID)) {
 	    			found = true;
 	    			customer = aCustomer;
 	    		}					    	
 	    	}
-	    	if(found == false)
-	    	{
+	    	if(found == false) {
 	    		int reply  = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
 	    		if (reply == JOptionPane.YES_OPTION) {
 	    			checkCustomerId = true;
@@ -186,11 +168,9 @@ public class StartMenu {
 	    		checkCustomerId = false;
 	    	}
 	   }
-	    
 	    while(checkCustomerPassword){
 	    	Object customerPassword = JOptionPane.showInputDialog(menu.userTypeFrame, "Enter Customer Password;");
-	    	   if(!customer.getPassword().equals(customerPassword))
-			    {
+	    	   if(!customer.getPassword().equals(customerPassword)) {
 			    	int reply  = JOptionPane.showConfirmDialog(null, null, "Incorrect password. Try again?", JOptionPane.YES_NO_OPTION);
 			    	if (reply == JOptionPane.YES_OPTION) {
 			    	} else if(reply == JOptionPane.NO_OPTION){
@@ -202,10 +182,14 @@ public class StartMenu {
 	    		   cont = true;
 	    	   }
 	    }
-	    if(cont)
-	    {
+	    if(cont) {
 	    	checkCustomerId = false;
 	    	button.returnCustomer();				    
 	    }				    
+	}
+	public void closeWindow() {
+		menu.userTypeFrame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) { System.exit(0); }
+		});
 	}
 }

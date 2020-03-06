@@ -31,7 +31,6 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 
 
 	public void statement() {
-		
 			menu.userTypeFrame.dispose();
 			menu.userTypeFrame = new JFrame("Customer Menu");
 			menu.userTypeFrame.setSize(400, 600);
@@ -57,8 +56,7 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 			JScrollPane scrollPane = new JScrollPane(textArea);
 			textPanel.add(scrollPane);
 			
-			for (int i = 0; i < menu.acc.getTransactionList().size(); i ++)
-			{
+			for (int i = 0; i < menu.acc.getTransactionList().size(); i ++) {
 				textArea.append(menu.acc.getTransactionList().get(i).toString());
 			}
 			
@@ -82,16 +80,13 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 		boolean on = true;
 		double balance = 0;
 
-		if( menu.acc instanceof CustomerCurrentAccount)
-		{
+		if( menu.acc instanceof CustomerCurrentAccount) {
 			int count = 3;
 			int checkPin = ((CustomerCurrentAccount)  menu.acc).getAtm().getPin();
 			loop = true;
 			
-			while(loop)
-			{
-				if(count == 0)
-				{
+			while(loop) {
+				if(count == 0) {
 					JOptionPane.showMessageDialog( menu.userTypeFrame, "Pin entered incorrectly 3 times. ATM card locked."  ,"Pin",  JOptionPane.INFORMATION_MESSAGE);
 					((CustomerCurrentAccount)  menu.acc).getAtm().setValid(false);
 					 menu.customer( menu.customer); 
@@ -113,11 +108,9 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 		   }
 		}		
 		
-		if(on == true)
-		{
+		if(on == true) {
 			String balanceTest = JOptionPane.showInputDialog( menu.userTypeFrame, "Enter amount you wish to lodge:");//the isNumeric method tests to see if the string entered was numeric. 
-			if(isNumeric(balanceTest))
-			{
+			if(isNumeric(balanceTest)) {
 				balance = Double.parseDouble(balanceTest);
 				loop = false;
 			} else {
@@ -141,21 +134,17 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 	}
 	
 	public void withdraw() {
-		
 			boolean loop = true;
 			boolean on = true;
 			double withdraw = 0;
 
-			if( menu.acc instanceof CustomerCurrentAccount)
-			{
+			if( menu.acc instanceof CustomerCurrentAccount) {
 				int count = 3;
 				int checkPin = ((CustomerCurrentAccount)  menu.acc).getAtm().getPin();
 				loop = true;
 				
-				while(loop)
-				{
-					if(count == 0)
-					{
+				while(loop) {
+					if(count == 0) {
 						JOptionPane.showMessageDialog( menu.userTypeFrame, "Pin entered incorrectly 3 times. ATM card locked."  ,"Pin",  JOptionPane.INFORMATION_MESSAGE);
 						((CustomerCurrentAccount)  menu.acc).getAtm().setValid(false);
 						 menu.customer( menu.customer); 
@@ -165,8 +154,7 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 					String Pin = JOptionPane.showInputDialog( menu.userTypeFrame, "Enter 4 digit PIN;");
 					int i = Integer.parseInt(Pin);
 					
-				   if(on)
-				   {
+				   if(on) {
 					  if(checkPin == i) {
 						loop = false;
 						JOptionPane.showMessageDialog( menu.userTypeFrame, "Pin entry successful" ,  "Pin", JOptionPane.INFORMATION_MESSAGE);
@@ -178,20 +166,17 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 			   }
 			}	
 			
-			if(on == true)
-					{
+			if(on == true) {
 				String balanceTest = JOptionPane.showInputDialog( menu.userTypeFrame, "Enter amount you wish to withdraw (max 500):");//the isNumeric method tests to see if the string entered was numeric. 
 				
-				if(isNumeric(balanceTest))
-				{
+				if(isNumeric(balanceTest)) {
 					withdraw = Double.parseDouble(balanceTest);
 					loop = false;
 				} else {
 					JOptionPane.showMessageDialog( menu.userTypeFrame, "You must enter a numerical value!" ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
 				}
 				
-				if(withdraw > 500)
-				{
+				if(withdraw > 500) {
 					JOptionPane.showMessageDialog( menu.userTypeFrame, "500 is the maximum you can withdraw at a time." ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
 					withdraw = 0;
 				} if(withdraw >  menu.acc.getBalance()) {
@@ -220,18 +205,11 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 				}
 			});		
 		}
-		
-	
-	public void setCustomerDetails() {
-		
-	}
 	
 	@Override
 	public void closeWindow() {
     	menu.userTypeFrame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent we) {
-					System.exit(0);
-			}
+			public void windowClosing(WindowEvent we) { System.exit(0); }
 		});			
 	}	
     
@@ -239,11 +217,8 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 	public boolean isNumeric(String str) {
     	  try {  
     		    double d = Double.parseDouble(str);  
-    		  }  
-    		  catch(NumberFormatException nfe){  
-    		    return false;  
-    		  }  
-    		  return true;  			
+    		  }  catch(NumberFormatException nfe){  
+    			  		return false;  
+    		  }   return true;  			
 	}
 }
-

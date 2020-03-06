@@ -11,8 +11,7 @@ public class Customer {
 	
 	ArrayList<CustomerAccount> accounts = new ArrayList<CustomerAccount> ();
 
-	public Customer()
-	{
+	public Customer(){
 		this.PPS = "";
 		this.surname = "";
 		this.firstName = "";
@@ -22,8 +21,7 @@ public class Customer {
 		this.accounts = null;
 	}
 	
-	public Customer(String PPS, String surname, String firstName, String DOB, String customerID, String password, ArrayList<CustomerAccount> accounts)
-	{
+	public Customer(String PPS, String surname, String firstName, String DOB, String customerID, String password, ArrayList<CustomerAccount> accounts){
 		this.PPS = PPS;
 		this.surname = surname;
 		this.firstName = firstName;
@@ -33,9 +31,7 @@ public class Customer {
 		this.accounts = accounts;
 	}
 	
-
-	public String getPPS()
-	{
+	public String getPPS() {
 		return this.PPS;
 	}
 	
@@ -69,38 +65,31 @@ public class Customer {
 		return this.accounts;
 	}
 	
-	public void setPPS(String PPS)
-	{
+	public void setPPS(String PPS){
 		this.PPS = PPS;
 	}
 	
-	public void setSurname(String surname)
-	{
+	public void setSurname(String surname){
 		this.surname = surname;
 	}
 	
-	public void setFirstName(String firstName)
-	{
+	public void setFirstName(String firstName){
 		this.firstName = firstName;
 	}
 	
-	public void setDOB(String DOB)
-	{
+	public void setDOB(String DOB){
 		this.DOB = DOB;
 	}
 	
-	public void setCustomerID(String customerID)
-	{
+	public void setCustomerID(String customerID){
 		this.customerID = customerID;
 	}
 	
-	public void setPassword(String password)
-	{
+	public void setPassword(String password){
 		this.password = password;
 	}
 	
-	public void setAccounts(ArrayList<CustomerAccount> accounts)
-	{
+	public void setAccounts(ArrayList<CustomerAccount> accounts){
 		this.accounts = accounts;
 	}
 	
@@ -113,5 +102,4 @@ public class Customer {
 				+ "Customer ID = " + this.customerID;
 			
 	}
-	
 }

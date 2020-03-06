@@ -1,8 +1,6 @@
-  
 import javax.swing.JFrame;
 
 public class MenuButtons extends JFrame {
-	private static final long serialVersionUID = 1L;
 
 	public void returnButton() {
 		Menu menu1 = new Menu();
@@ -21,5 +19,4 @@ public class MenuButtons extends JFrame {
 		Menu.jFrame.dispose();
 		menu1.customer(menu1.customer);
 	}
-
 }

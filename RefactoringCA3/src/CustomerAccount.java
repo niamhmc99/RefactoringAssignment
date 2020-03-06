@@ -6,47 +6,39 @@ public class CustomerAccount  {
 	double balance;
 	ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
 
-	public CustomerAccount()
-	{
+	public CustomerAccount(){
 		this.number = "";
 		this.balance = 0;
 		this.transactionList = null;
 	}
 	
-	public CustomerAccount(String number, double balance, ArrayList<AccountTransaction> transactionList)
-	{
+	public CustomerAccount(String number, double balance, ArrayList<AccountTransaction> transactionList){
 		this.number = number;
 		this.balance = balance;
 		this.transactionList = transactionList;
 	}
 		
-	public String getNumber()
-	{
+	public String getNumber(){
 		return this.number;
 	}
 	
-	public double getBalance()
-	{
+	public double getBalance(){
 		return this.balance;
 	}
 	
-	public ArrayList<AccountTransaction> getTransactionList()
-	{
+	public ArrayList<AccountTransaction> getTransactionList(){
 		return this.transactionList;
 	}
 
-	public void setNumber(String number)
-	{
+	public void setNumber(String number){
 		this.number = number;
 	}
 	
-	public void setBalance(double balance)
-	{
+	public void setBalance(double balance){
 		this.balance = balance;
 	}
 	
-	public void setTransactionList(ArrayList<AccountTransaction> transactionList)
-	{
+	public void setTransactionList(ArrayList<AccountTransaction> transactionList){
 		this.transactionList = transactionList;
 	}
 }
