@@ -5,9 +5,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class AdminGUI {
+public class AdminGUI extends Menu{
 	
-	public adminGui()
+	public void adminGui() {
 	userTypeFrame = new JFrame("Administrator Menu");
 	userTypeFrame.setSize(400, 400);
 	userTypeFrame.setLocation(200, 200);
@@ -57,5 +57,5 @@ public class AdminGUI {
 	returnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 	returnButton = new JButton("Exit Admin Menu");
 	returnPanel.add(returnButton);
-
+	}
 }
