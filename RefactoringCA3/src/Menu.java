@@ -30,35 +30,9 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 	public void menuStart()
 	{
 		StartMenu start = new StartMenu();
-
-			userTypeFrame = new JFrame("User Type");
-			userTypeFrame.setSize(400, 300);
-			userTypeFrame.setLocation(200, 200);
-			closeWindow();
-			userTypePanel = new JPanel();
-			final ButtonGroup userType = new ButtonGroup();
-			JRadioButton radioButton;
-			userTypePanel.add(radioButton = new JRadioButton("Existing Customer"));
-			radioButton.setActionCommand("Customer");
-			userType.add(radioButton);
-			
-			userTypePanel.add(radioButton = new JRadioButton("Administrator"));
-			radioButton.setActionCommand("Administrator");
-			userType.add(radioButton);
-			
-			userTypePanel.add(radioButton = new JRadioButton("New Customer"));
-			radioButton.setActionCommand("New Customer");
-			userType.add(radioButton);
-
-			continuePanel = new JPanel();
-			continueButton = new JButton("Continue");
-			continuePanel.add(continueButton);
-
-			Container content = userTypeFrame.getContentPane();
-			content.setLayout(new GridLayout(2, 1));
-			content.add(userTypePanel);
-			content.add(continuePanel);
-
+		MenuGUI gui = new MenuGUI();
+		gui.menuGui();
+		final ButtonGroup userType = new ButtonGroup();
 			continueButton.addActionListener(new ActionListener(  ) {
 				public void actionPerformed(ActionEvent ae) {
 					String user = userType.getSelection().getActionCommand(  );
@@ -189,7 +163,7 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 				custContinued.customerContinue();
 			}
 		});
-	}
+		}
 	}
 	
 	public static CustomerAccount returnAcc() {
