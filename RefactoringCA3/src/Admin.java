@@ -20,9 +20,8 @@ import javax.swing.SwingConstants;
 
 public class Admin extends JFrame implements CommonWindowFunctions{
 
-	private static final long serialVersionUID = 1L;
-	ArrayList<Customer> customerList = Menu.returnArray();
 	Menu menu = new Menu();
+	ArrayList<Customer> customerList = menu.returnArray();
 	MenuButtons button = new MenuButtons();
 	CustomerAccount acc = Menu.returnAcc();
 	JPanel boxPanel,buttonPanel, gridPanel, cancelPanel, textPanel, returnPanel;
@@ -33,8 +32,8 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 	Account account;
 	
 	public void bankCharges() {
-			boolean loop = true;
-			boolean found = false;
+		boolean loop = true;
+		boolean found = false;
 		
 			if(customerList.isEmpty()) {
 				CustomerListEmpty();	
@@ -105,7 +104,6 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 							acc.setBalance(acc.getBalance()-25);
 							JOptionPane.showMessageDialog(menu.userTypeFrame, "New balance = " + acc.getBalance() ,"Success!",  JOptionPane.INFORMATION_MESSAGE);
 						}
-
 						if(acc instanceof CustomerCurrentAccount) {
 							JOptionPane.showMessageDialog(menu.userTypeFrame, "15" + euro + " current account fee aplied."  ,"",  JOptionPane.INFORMATION_MESSAGE);
 							acc.setBalance(acc.getBalance()-25);
@@ -121,9 +119,8 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 							button.returnButton();				
 						}
 					});	
-				
 					}
-					}
+				}
 				}	}
 	}
 

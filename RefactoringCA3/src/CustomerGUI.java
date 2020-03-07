@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class CustomerContinued extends Menu{
+public class CustomerGUI extends Menu{
 	
 	public void customerContinue() {	
 		Menu menu = new Menu();

@@ -1,11 +1,13 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.swing.*;
 
 public class Menu extends JFrame implements CommonWindowFunctions{
 	
-	private static ArrayList<Customer> customerList;
+	protected static ArrayList<Customer> customerList = new ArrayList<Customer>();
     int position = 0;
 	Customer customer;
 	static CustomerAccount acc = new CustomerAccount();
@@ -24,31 +26,21 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 	public static void main(String[] args)
 	{
 		Menu driver = new Menu();
+		   //populating customerList for testing purpose
+		// ArrayList<CustomerAccount> ca = new ArrayList<>(Arrays.asList(new CustomerDepositAccount(1.5,"D1234", 2000.0, new ArrayList<AccountTransaction>())));
+		// ca.add(new CustomerCurrentAccount(new ATMCard(1234, true),"C1234",1000.0, new ArrayList<AccountTransaction>()));
+		// ArrayList customerList = new ArrayList<>(Arrays.asList());
+		 //driver.customerList.add(new Customer ("1234","Joe","Bloggs","11061998","ID1234","1234",ca));
+		driver.test(); 
 		driver.menuStart();
 	}
 	
-	public void menuStart()
-	{
+	public void menuStart() {
+		
 		StartMenu start = new StartMenu();
 		MenuGUI gui = new MenuGUI();
 		gui.menuGui();
 		final ButtonGroup userType = new ButtonGroup();
-			continueButton.addActionListener(new ActionListener(  ) {
-				public void actionPerformed(ActionEvent ae) {
-					String user = userType.getSelection().getActionCommand(  );
-					
-					if(user.equals("New Customer")){
-						start.newCustomer();
-					}
-					if(user.equals("Administrator")) {
-						start.administrator();
-					}
-					if(user.equals("Customer")){
-						start.existingCustomer();
-					}
-				}
-			});
-			userTypeFrame.setVisible(true);	
 	}
 	
 	public void admin()
@@ -108,16 +100,9 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 	}
 
 	public void customer(Customer e) {	
-		CustomerContinued custContinued = new CustomerContinued();
-		userTypeFrame = new JFrame("Customer Menu");
+		CustomerGUI custContinued = new CustomerGUI();
 		
-		userTypeFrame.setSize(400, 300);
-		userTypeFrame.setLocation(200, 200);
-		closeWindow();         
-		userTypeFrame.setVisible(true);
-		
-		if(customer.getAccounts().size() == 0)
-		{
+		if(customer.getAccounts().size() == 0) {
 			JOptionPane.showMessageDialog(userTypeFrame, "This customer does not have any accounts yet. \n An admin must create an account for this customer \n for them to be able to use customer functionality. " ,"Oops!",  JOptionPane.INFORMATION_MESSAGE);
 			userTypeFrame.dispose();				
 			menuStart();
@@ -173,7 +158,18 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 	public static ArrayList<Customer> returnArray() {
 		return customerList;
 	}
+	public void addCustomer(Customer customer) {
+		this.customerList.add(customer);
+	}
 
+	public void test () {
+		 //populating customerList for testing purpose
+		 ArrayList<CustomerAccount> ca = new ArrayList<>(Arrays.asList(new CustomerDepositAccount(1.5,"D123", 10000.0, new ArrayList<AccountTransaction>())));
+		 ca.add(new CustomerCurrentAccount(new ATMCard(1234, true),"C123",5000.0, new ArrayList<AccountTransaction>()));
+		 //ArrayList customerList = new ArrayList<>(Arrays.asList());
+		 customer =(new Customer ("1234","Mary","Doe","17031999","ID1234","1234567",ca));
+		 addCustomer(customer);
+	}
 	@Override
 	public void closeWindow() {
 		userTypeFrame.addWindowListener(new WindowAdapter() {
@@ -188,8 +184,7 @@ public class Menu extends JFrame implements CommonWindowFunctions{
 	  } 
 	  catch(NumberFormatException nfe) {  
 	    return false;  
-	  }  
-	  return true;  
+	  }  return true;  
 	}
 	
 	public String getPassword() {

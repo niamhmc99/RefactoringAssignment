@@ -20,9 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class CustomerFunctionality extends JFrame implements CommonWindowFunctions{
-	
-	ArrayList<Customer> customerList = Menu.returnArray();
 	Menu menu = new Menu();
+	ArrayList<Customer> customerList = menu.returnArray();
 	MenuButtons button = new MenuButtons();
 	JLabel label;
 	JPanel textPanel, returnPanel;
@@ -39,13 +38,11 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 			menu.userTypeFrame.setVisible(true);
 			
 			label = new JLabel("Summary of account transactions: ");
-			
 			returnPanel = new JPanel();
 			returnButton = new JButton("Return");
 			returnPanel.add(returnButton);
 			
 			textPanel = new JPanel();
-			
 			textPanel.setLayout( new BorderLayout() );
 			textArea = new JTextArea(40, 20);
 			textArea.setEditable(false);
@@ -134,9 +131,9 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 	}
 	
 	public void withdraw() {
-			boolean loop = true;
-			boolean on = true;
-			double withdraw = 0;
+		boolean loop = true;
+		boolean on = true;
+		double withdraw = 0;
 
 			if( menu.acc instanceof CustomerCurrentAccount) {
 				int count = 3;
@@ -194,7 +191,6 @@ public class CustomerFunctionality extends JFrame implements CommonWindowFunctio
 	
 			 AccountTransaction transaction = new AccountTransaction(date2, type, amount);
 			 menu.acc.getTransactionList().add(transaction);
-				
 			 JOptionPane.showMessageDialog( menu.userTypeFrame, withdraw + euro + " withdrawn." ,"Withdraw",  JOptionPane.INFORMATION_MESSAGE);
 			 JOptionPane.showMessageDialog( menu.userTypeFrame, "New balance = " +  menu.acc.getBalance() + euro ,"Withdraw",  JOptionPane.INFORMATION_MESSAGE);
 			}	

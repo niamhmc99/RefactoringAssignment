@@ -15,8 +15,8 @@ public class MenuButtons extends JFrame {
 	}
 
 	public void returnCustomer() {
-		Menu menu1 = new Menu();
-		Menu.jFrame.dispose();
-		menu1.customer(menu1.customer);
+		Menu menu = new Menu();
+		menu.jFrame.dispose();
+		menu.customer(menu.customer);
 	}
 }
