@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 public class Admin extends JFrame implements CommonWindowFunctions{
 
 	Menu menu = new Menu();
+	private static Admin admin;
 	ArrayList<Customer> customerList = menu.returnArray();
 	MenuButtons button = new MenuButtons();
 	CustomerAccount acc = Menu.returnAcc();
@@ -30,6 +31,13 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 	JTextArea textArea;
 	JButton cancelBtn, saveBtn;
 	Account account;
+	
+	public static Admin getInstance() {
+		if(admin == null) {
+			admin = new Admin();
+		}
+		return admin;
+	}
 	
 	public void bankCharges() {
 		boolean loop = true;
@@ -54,7 +62,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 						} else if(reply == JOptionPane.NO_OPTION){
 							menu.userTypeFrame.dispose();
 							loop = false;
-							button.returnAdmin();
+							Admin.getInstance();
 						}
 					} else {
 						menu.userTypeFrame.dispose();
@@ -149,9 +157,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 						if (reply == JOptionPane.YES_OPTION) {
 							loop = true;
 						} else if(reply == JOptionPane.NO_OPTION) {
-							menu.userTypeFrame.dispose();
-							loop = false;
-							menu.admin();
+							Admin.getInstance();
 						}
 					} else {
 						menu.userTypeFrame.dispose();
@@ -220,7 +226,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 						button.returnButton();				
 					}
 			     });	
-					}
+				}
 				}
 		    }
 		  }
@@ -514,8 +520,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 					    	if (reply == JOptionPane.YES_OPTION) {
 					    	} else if(reply == JOptionPane.NO_OPTION){
 					    		menu.userTypeFrame.dispose();
-					    		menu.admin();
-					    	}
+					    		Admin.getInstance();					    	}
 					    } else {
 					    	if(menu.customer.getAccounts().size()>0)
 					    	{
