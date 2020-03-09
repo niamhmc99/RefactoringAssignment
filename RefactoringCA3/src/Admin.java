@@ -39,7 +39,7 @@ public class Admin extends JFrame implements CommonWindowFunctions{
 		return admin;
 	}
 	
-	public void bankCharges() {
+	public void bankCharges() {		
 		boolean loop = true;
 		boolean found = false;
 		
